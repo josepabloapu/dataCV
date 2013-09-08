@@ -1,0 +1,69 @@
+%% LaTeX Document
+%% Author: Jose Pablo Apú
+%% Document Class
+\documentclass[11pt]{article}
+%%*************************************************************************
+%% Most used packages
+\usepackage{graphicx}				%%include figures
+\usepackage[utf8]{inputenc}			%%include latin characters
+\usepackage[spanish]{babel}			%%spanish
+\usepackage[vmargin=4cm,			%%margins
+	    tmargin=3cm,
+	    hmargin=2cm,
+	    letterpaper]{geometry}
+\usepackage{color}				%%include colors
+\usepackage{fancyhdr}				%%use fancy headers and footes
+%\usepackage{framed}				%%framed boxes
+\usepackage{hyperref}				%%make hyperlinks
+%%*************************************************************************
+%% Other settings
+\definecolor{shadecolor}{rgb}{1,0.8,0.3}	%%boxes color
+\setlength{\parindent}{0pt}			%%indemptation
+\pagestyle{fancy}				%%needed to include fancy styles
+\renewcommand{\headrulewidth}{0.25mm}		%%linewidth of the headers
+\pagenumbering{gobble}				%%remove the page number
+\graphicspath{{../multimedia/imagenes/}}	%%multimedia path
+%%*************************************************************************
+%% Fancy Header
+%% EIE's template
+\fancyhead[L]{\includegraphics[scale=0.15]{ucr}}
+\fancyhead[C]{UNIVERSIDAD DE COSTA RICA\\
+	      ESCUELA DE INGENIERÍA ELECTRICA\\
+	      ESTRUCTURAS ABSTRACTAS DE DATOS Y ALGORITMOS\\
+	      PARA INGENIERIA - IE0217\\
+	      PROYECTO I - PROPUESTA}
+\fancyhead[R]{\includegraphics[scale=0.4]{eie}}
+\pagestyle{fancy}
+\setlength{\headheight}{60pt}
+%%*************************************************************************
+\begin{document}
+
+\begin{center}
+{ \huge \bfseries Data Computing Visualization Library }\\[0.2cm]
+{ Jose Campos - Jose Pablo Apu - Jorge Soto }\\[0.2cm]
+\rule{\linewidth}{0.25mm}
+\end{center}
+
+\subsection*{Introducción}
+Con el fin de brindar una mayor facilidad para visualizar los datos, la idea es crear una libreria, en c++, que tome los datos a traves de una base de datos y los despliegue en pantalla de una manera grafica. Para lograr dicha tarea se utilizara mysql como manejador de bases de datos, utilizando la libreria mysql++, y para visualizar los datos de manera grafica se piensa utilizar la libreria llamada plot++. 
+
+\subsection*{Justificación}
+Justificacion
+
+\subsubsection*{Objetivo General}
+objetivo general
+
+\subsubsection*{Objetivos Específicos}
+\begin{itemize}
+\item objetivo 1
+\item objetivo 2
+\end{itemize}
+\subsection*{Metodología}
+
+%% References
+\begin{thebibliography}{10}
+\bibitem{label}Ref 1
+\bibitem{label}\url{http://www.url.com}
+\end{thebibliography}
+%%*************************************************************************	
+\end{document}
