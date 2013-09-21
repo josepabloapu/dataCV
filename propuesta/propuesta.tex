@@ -6,7 +6,7 @@
 %% Most used packages
 \usepackage{graphicx}				%%include figures
 \usepackage[utf8]{inputenc}			%%include latin characters
-\usepackage[english]{babel}			%%spanish
+\usepackage[spanish]{babel}			%%spanish
 \usepackage[vmargin=4cm,			%%margins
 	    tmargin=3cm,
 	    hmargin=2cm,
@@ -45,24 +45,34 @@
 \end{center}
 
 \subsection*{Introducción}
-Con el fin de brindar una mayor facilidad para visualizar los datos, la idea es crear una libreria, en c++, que tome los datos a traves de una base de datos y los despliegue en pantalla de una manera grafica. Para lograr dicha tarea se utilizara mysql como manejador de bases de datos, utilizando la libreria mysql++, y para visualizar los datos de manera grafica se piensa utilizar la libreria llamada plot++. Además se pretende implementar un set de herramientas para obtener datos estadísticos de los datos obtenidos de la base de datos. 
+Con el fin de brindar una mayor facilidad para visualizar los datos, la idea es crear una libreria, en c++, 
+que tome los datos a traves de una base de datos y los despliegue en pantalla de una manera grafica. 
+Para lograr dicha tarea se utilizara mysql como manejador de bases de datos, utilizando la libreria mysql++, 
+y para visualizar los datos de manera grafica se piensa utilizar la libreria llamada plot++. 
+Además se pretende implementar un set de herramientas para obtener datos estadísticos de los datos obtenidos de la base de datos. 
 
 \subsection*{Justificación}
-La librería está diseñada para que cualquier usuario de MySql pueda utilizarla. La visualización de datos permite un mejor análisis y una mayor comprensión de los mismos. En una base de datos, la información es prácticamente números y letras únicamente. Al graficar dicha información, se puede entender de una mejor manera el significado de los datos.
+La librería está diseñada para que cualquier usuario de MySql pueda utilizarla. La visualización de datos 
+permite un mejor análisis y una mayor comprensión de los mismos. En una base de datos, la información es 
+prácticamente números y letras únicamente. Al graficar dicha información, se puede entender de una mejor
+manera el significado de los datos.
 
 \subsubsection*{Objetivo General}
 Diseñar una biblioteca que permita la visualización de la información en una base de datos.
 
 \subsubsection*{Objetivos Específicos}
 \begin{itemize}
-\item Importar la información de una base de datos que utiliza el manejador MySql.
-\item Crear un módulo que tome los datos importados desde MySql y los convierta en información compatible para la librería que grafica.
-\item Generar un histograma a partir de los datos importados.
-\item Generar un gráfico de dispersión a partir de los datos importados.
-\item Implementar un conjunto de herramientas que permitan un análisis estadístico de los datos.
+\item Implementar un módulo que utilice mysql++ para que importe una serie de datos desde MySql 
+      y los convierta en información compatible para la librería que grafica.
+\item Implementar un conjunto de herramientas matemáticas que permitan un análisis estadístico cuantitativo de los datos.
+\item Implementar un modulo que permita el análisis cualitativo de la información mediante distintas técnicas de visualización de datos.
 \end{itemize}
+
 \subsection*{Metodología}
-Mediante la utilización de librerías ya creadas, como lo son mysql++, sfml, y chplot o bien openGL, se creará herramientas para facilitar al programador visualizar los datos.
+Mediante la utilización de librerías ya creadas, como lo son mysql++, sfml, y gnuplot o bien openGL, 
+se creará herramientas para facilitar al programador visualizar un conjunto de datos. Para esto se utilizará principalmente el
+lenguaje de programación C++ y el paradigma de programación orientada a objetos.
+
 %% References
 \begin{thebibliography}{10}
 \bibitem{label}\url{http://tangentsoft.net/mysql++/}
