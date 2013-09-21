@@ -5,3 +5,5 @@ all:
 	$(CC) $(OBJ)
 	$(CC) $(OBJ)
 
+clean:
+	rm *.aux *.log *.out *.pdf
