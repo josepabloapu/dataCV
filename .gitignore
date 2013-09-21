@@ -12,7 +12,10 @@
 *.la
 *.a
 
+#Backup files
 *~
+
+#Latex aux files
 *.synctex.gr
 *.out
 *.log
