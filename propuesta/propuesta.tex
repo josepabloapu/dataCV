@@ -6,7 +6,7 @@
 %% Most used packages
 \usepackage{graphicx}				%%include figures
 \usepackage[utf8]{inputenc}			%%include latin characters
-\usepackage[spanish]{babel}			%%spanish
+\usepackage[english]{babel}			%%spanish
 \usepackage[vmargin=4cm,			%%margins
 	    tmargin=3cm,
 	    hmargin=2cm,
@@ -92,6 +92,35 @@ Mediante la utilización de librerías ya creadas, como lo son mysql++, sfml
 y gnuplot o bien openGL, se creará herramientas para facilitar al programador 
 visualizar un conjunto de datos. Para esto se utilizará principalmente el
 lenguaje de programación C++ y el paradigma de programación orientada a objetos.
+
+\begin{table}[ht]
+\caption{Métodos que se esperan implementar} % title of Table
+\centering % used for centering table
+\begin{tabular}{p{4cm} p{12cm}} % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+\\
+Método & Descripción \\ [0.5ex] % inserts table 
+%heading
+\hline % inserts single horizontal line
+\\
+
+Conexión a MySQL & Se espera que los datos provengan de una base de datos, por lo que es necesario vincular estos datos con el módulo que grafica. \\ % inserting body of the table
+
+\\
+
+Query de MySQL & Para interpretar los datos, es necesario acomodar, o bien optener información importante para generar la gráfica. Para se utiliza el motor de MySQL para aprovechar dicha facilidad \\
+
+\\
+
+Obtener la media, la desviación estandar, y la varianza & de esto se encarga MySQL y funciona para obtener las gráficas de media y la distribucuión gaussiana. \\
+
+\\
+
+Kde y Jitterplor & Son funciones que sirven para... y que pueden ser generadas mediante gnuplot. \\
+\hline %inserts single line
+\end{tabular}
+\label{table:nonlin} % is used to refer this table in the text
+\end{table}
 
 \subsection*{Cronograma}
 
