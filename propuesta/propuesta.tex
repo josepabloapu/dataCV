@@ -1,12 +1,12 @@
 %% LaTeX Document
-%% Author: Jose Pablo Apú
+%% Author: Jose Pablo Apú, Jose Carlos Campos, Jorge Soto
 %% Document Class
 \documentclass[11pt]{article}
 %%*************************************************************************
 %% Most used packages
 \usepackage{graphicx}				%%include figures
 \usepackage[utf8]{inputenc}			%%include latin characters
-\usepackage[english]{babel}			%%spanish
+\usepackage[spanish]{babel}			%%spanish
 \usepackage[vmargin=4cm,			%%margins
 	    tmargin=3cm,
 	    hmargin=2cm,
@@ -45,41 +45,63 @@
 \end{center}
 
 \subsection*{Introducción}
-Con el fin de brindar una mayor facilidad para visualizar los datos, la idea es crear una libreria, en c++, que tome los datos a traves de una base de datos y los despliegue en pantalla de una manera grafica. Para lograr dicha tarea se utilizara mysql como manejador de bases de datos, utilizando la libreria mysql++, y para visualizar los datos de manera grafica se piensa utilizar la libreria llamada plot++. Además se pretende implementar un set de herramientas para obtener datos estadísticos de los datos obtenidos de la base de datos. 
+Con el fin de brindar una mayor facilidad para visualizar los datos, 
+la idea es crear una libreria, en c++, que tome los datos a traves de una 
+base de datos y los despliegue en pantalla de una manera grafica. Para lograr 
+dicha tarea se utilizara mysql como manejador de bases de datos, utilizando 
+la libreria mysql++ y para visualizar los datos de manera grafica se piensa 
+utilizar la libreria llamada plot++. Además se pretende implementar un set 
+de herramientas para obtener datos estadísticos de los datos obtenidos de la base de datos. 
 
 \subsection*{Justificación}
-La librería está diseñada para que cualquier usuario de MySql pueda utilizarla. La visualización de datos permite un mejor análisis y una mayor comprensión de los mismos. En una base de datos, la información es prácticamente números y letras únicamente. Al graficar dicha información, se puede entender de una mejor manera el significado de los datos.
+La librería será diseñada para que cualquier usuario de MySql pueda utilizarla.
+La visualización de datos permite un mejor análisis y una mayor comprensión 
+de los mismos. En una base de datos, la información es prácticamente números 
+y letras únicamente. Al graficar dicha información, se puede entender de una mejor
+manera el significado de los datos.
 
-En el análisis de datos, se deben tomar decisiones acerca de los mismos, de las que dependen clientes, productos y beneficios. Una manera eficiente de hacerlo es con la visualización de datos. Además, permite una relación más directa del público con una compañía y sus expertos. %%% microresumen de la pagina strata.oreilly
+Cuando se tiene una gran cantidad de información, millones de datos individuales, 
+es dificil poder interpretar la información y analizarla para así poder tomar
+una decisión con base en los resultados obtenidos. Para poder darle un sentido
+de forma eficiente a esta gran cantidad de información se tiene por respuesta 
+la visualización de datos. Pero también se debe seleccionar la visualización
+apropiada para un conjunto de datos determinado, ya que no todos los métodos 
+de graficación son apropiados para describir los resultados obtenidos.\cite{oreilly} 
 
-En el nivel emprasarial, se debe hacer uso de herramientas de visualización de datos. La cantidad de datos es proporcional al tamaño de la empresa. Teniendo muchos datos, es más dificil encontrar patrones y relaciones para la correcta toma de decisiones. Se necesita elegir de manera rápida y precisa las decisiones de negocios para que la empresa permanezca competitiva. %%% dundas
+En el nivel emprasarial, se debe hacer uso de herramientas de visualización de datos.
+La cantidad de datos es proporcional al tamaño de la empresa. Teniendo muchos datos, 
+es más dificil encontrar patrones y relaciones para la correcta toma de decisiones. 
+Se necesita elegir de manera rápida y precisa las decisiones de negocios para que 
+la empresa permanezca competitiva.\cite{dundas}
 
 \subsubsection*{Objetivo General}
 Diseñar una biblioteca que permita la visualización de la información en una base de datos.
 
 \subsubsection*{Objetivos Específicos}
 \begin{itemize}
-\item Importar la información de una base de datos que utiliza el manejador MySql.
-\item Crear un módulo que tome los datos importados desde MySql y los convierta en información compatible para la librería que grafica.
-\item Generar un histograma a partir de los datos importados.
-\item Generar un gráfico de dispersión a partir de los datos importados.
-\item Implementar un conjunto de herramientas que permitan un análisis estadístico de los datos.
+\item Implementar un módulo que utilice mysql++ para que importe una serie de datos desde MySql 
+      y los convierta en información compatible para la librería que grafica.
+\item Implementar un conjunto de herramientas matemáticas que permitan un análisis
+	  estadístico cuantitativo de los datos.
+\item Implementar un modulo que permita el análisis cualitativo de la información mediante 
+	  distintas técnicas de visualización de datos.
 \end{itemize}
+
 \subsection*{Metodología}
-Mediante la utilización de librerías ya creadas, como lo son mysql++, sfml, y chplot o bien openGL, se creará herramientas para facilitar al programador visualizar los datos.
+Mediante la utilización de librerías ya creadas, como lo son mysql++, sfml 
+y gnuplot o bien openGL, se creará herramientas para facilitar al programador 
+visualizar un conjunto de datos. Para esto se utilizará principalmente el
+lenguaje de programación C++ y el paradigma de programación orientada a objetos.
+
 %% References
 \begin{thebibliography}{10}
-
-\bibitem{label}\url{http://www.dundas.com/discover/article/making-business-decisions-easier-with-data-visualizations/}
-
-\bibitem{label}\url{http://www.opengl.org/}
-
-\bibitem{label}\url{http://www.sfml-dev.org/}
-
-\bibitem{label}\url{http://strata.oreilly.com/2012/02/why-data-visualization-matters.html}
-
-\bibitem{label}\url{http://tangentsoft.net/mysql++/}
-
+\bibitem{tangent}\url{http://tangentsoft.net/mysql++/}
+\bibitem{opengl}\url{http://www.opengl.org/}
+\bibitem{sfml}\url{http://www.sfml-dev.org/}
+\bibitem{oreilly}Steele, J., \textit{Why data visualization matters}, 
+		\url{http://strata.oreilly.com/2012/02/why-data-visualization-matters.html}
+\bibitem{dundas}Dundas Data Visualization, Inc., \textit{Making Business Decisions Easier with Data Visualizations}
+		\url{http://www.dundas.com/discover/article/making-business-decisions-easier-with-data-visualizations/}
 \end{thebibliography}
 %%*************************************************************************	
 \end{document}
