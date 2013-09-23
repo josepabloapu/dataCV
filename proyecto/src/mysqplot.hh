@@ -7,6 +7,8 @@
 #include <mysql++.h>
 #include "gnuplot_i.hpp"
 
+using namespace std;
+
 class Mysqplot{
 
 private:
@@ -15,13 +17,14 @@ private:
   string username;
   string password;
   int n_lines;
+  int n_cols;
   
 public:
   Mysqplot();
   ~Mysqplot();
   bool conn(string, string, string, string);
-  bool fill(int=0,int=n_lines);
-  float mean();
+  bool fill(int=0,int=(n_lines-1));
+  float mean(int);
   float standar_desviation();
   float variance();
   bool histogram();
