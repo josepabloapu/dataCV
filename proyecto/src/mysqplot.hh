@@ -7,17 +7,21 @@
 #include <mysql++.h>
 #include "gnuplot_i.hpp"
 
-class mysqplot{
-protected:
+class Mysqplot{
+
+private:
   string database;
   string server;
   string username;
   string password;
+  int n_lines;
+  
 public:
-  mysqplot();
-  ~mysqplot();
+  Mysqplot();
+  ~Mysqplot();
   bool conn(string, string, string, string);
-  float media();
+  bool fill(int=0,int=n_lines);
+  float mean();
   float standar_desviation();
   float variance();
   bool histogram();
