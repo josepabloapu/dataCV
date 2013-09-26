@@ -12,6 +12,7 @@ using namespace std;
 class Mysqplot{
 
 private:
+  string table;
   string database;
   string server;
   string username;
@@ -20,7 +21,7 @@ private:
   int n_cols;
   
 public:
-  Mysqplot();
+  Mysqplot(string);
   ~Mysqplot();
   bool conn(string, string, string, string);
   bool fill(int=0,int=(n_lines-1));
