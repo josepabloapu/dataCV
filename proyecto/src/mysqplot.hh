@@ -3,9 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include <stdlib>
+//#include <stdlib>
 #include <mysql++.h>
-#include "gnuplot_i.hpp"
+//#include "gnuplot_i.hpp"
 
 using namespace std;
 
@@ -17,13 +17,16 @@ private:
   string server;
   string username;
   string password;
+
+public:
   int n_lines;
   int n_cols;
   
-public:
-  Mysqplot(string);
+  Mysqplot(string, string, string, string);
   ~Mysqplot();
-  bool conn(string, string, string, string);
+  bool get_table(string);
+  int get_cols();
+  int get_lines();
   bool fill(int=0,int=(n_lines-1));
   float mean(int);
   float standar_desviation();
