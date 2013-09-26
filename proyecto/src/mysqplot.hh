@@ -19,7 +19,8 @@ private:
   string password;
   int n_lines;
   int n_cols;
-  
+  vector<float>* ptdata;
+
 public:
   Mysqplot(string);
   ~Mysqplot();
@@ -31,6 +32,7 @@ public:
   bool histogram();
   bool gaussian_distribution();
   bool jitterplot();
+  bool scatterplot();
   bool kde();
   bool pdf();
   bool cdf();
