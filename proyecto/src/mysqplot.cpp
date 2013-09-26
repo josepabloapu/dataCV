@@ -15,12 +15,12 @@ bool Mysqplot::get_table(string table){
 }
 
 int Mysqplot::get_cols(){
-  get_cols = n_cols;
+  int get_cols = n_cols;
   return get_cols;
 }
 
 int Mysqplot::get_lines(){
-  get_lines = n_lines;
+  int get_lines = n_lines;
   return get_lines;
 }
 

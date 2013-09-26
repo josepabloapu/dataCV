@@ -1,4 +1,7 @@
-#include <../mysqplot.hh>
+#include <string>
+#include <iostream>
+//#include <stdlib>
+#include <mysql++.h>
 //#include "gnuplot_i.hpp"
 
 int main(){
