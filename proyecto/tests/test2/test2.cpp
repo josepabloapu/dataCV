@@ -15,6 +15,6 @@ int main(){
 	A.fill_vector("datos",y);
 	for(int i=0;i<x.size();++i) cout<<x[i]<<endl;
 	for(int i=0;i<y.size();++i) cout<<y[i]<<endl;
-	//cout<<"la media es: "<< mean(y) <<endl;
+	cout<<"la media es: "<< A.mean("datos") <<endl;
 }
  

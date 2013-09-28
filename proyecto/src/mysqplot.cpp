@@ -45,9 +45,12 @@ int Mysqplot::get_cols(){
 	return n;
 }
 
-/*float mean(vector<double> &m){
-	int mean = 0;
-	for(int i=0;i<m.size();++i) mean+=m[i];
-	mean = mean/m.size();
+float Mysqplot::mean(const char* str){
+	float mean = 0;
+	for(int i=0;i<(this->get_lines());++i) mean+=(float)result_object[i][str];
+	mean = mean/this->get_lines();
 	return mean;
-}*/
+}
+
+//float mean(vector<double> &m){
+	

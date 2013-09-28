@@ -32,7 +32,7 @@ public:
 	int get_lines();
 	int get_cols();
   
-	//float mean(string);
+	float mean(const char*);
 	float standar_desviation();
 	float variance();
   
