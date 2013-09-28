@@ -19,7 +19,7 @@ private:
 	//string password;
 	int n_lines;
 	int n_cols;
-	vector<float>* ptdata;
+	//vector<float>* ptdata;
 
 public:
 
@@ -27,11 +27,12 @@ public:
 	~Mysqplot();
   
 	bool conn(const char*,const char*,const char*,const char*);
-	bool fill(int,int);
+	bool fill_vector(int,int, const char*, vector<double> &);
+	bool fill_vector(const char*, vector<double> &);
 	int get_lines();
 	int get_cols();
   
-	float mean(int);
+	//float mean(string);
 	float standar_desviation();
 	float variance();
   
