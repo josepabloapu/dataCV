@@ -17,14 +17,16 @@ private:
   string server;
   string username;
   string password;
-  int n_lines;
-  int n_cols;
   vector<float>* ptdata;
 
 public:
+
+  int n_lines;
+  int n_cols;
+
   Mysqplot(string);
   ~Mysqplot();
-  bool conn(char,char,char,char);
+  bool conn(const char*,const char*,const char*,const char*);
   bool fill(int,int);
   float mean(int);
   float standar_desviation();

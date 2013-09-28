@@ -21,3 +21,6 @@
 *.log
 *.aux
 *.pdf
+
+#Executable files
+*.exe
