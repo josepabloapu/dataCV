@@ -1,5 +1,5 @@
 INCPATH = -I/usr/include/mysql -I/usr/local/include/mysql++
-LIBS = -lmysqlpp -lmysqlclient
+LIBS = -lmysqlpp -lmysqlclient -lstdc++
 CC = g++
 DEBUG = -g
 LFLAGS = -Wall $(DEBUG) -L/usr/local/lib ../../src/mysqplot.o
@@ -13,7 +13,7 @@ all :
 	
 $(TARGET) : $(OBJS)
 
-	$(CC) $(LFLAGS) $(OBJS) $(LIBS) $(INCPATH) -o $(TARGET).exe
+	$(CC) -ggdb $(LFLAGS) $(OBJS) $(LIBS) $(INCPATH) -o $(TARGET).exe
 
 clean:
 

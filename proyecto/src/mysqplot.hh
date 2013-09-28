@@ -3,41 +3,45 @@
 
 #include <string>
 #include <iostream>
-//#include <stdlib>
+#include <stdlib.h>
 #include <mysql++.h>
-//#include "gnuplot_i.hpp"
 
 using namespace std;
 
 class Mysqplot{
 
 private:
-  string table;
-  string database;
-  string server;
-  string username;
-  string password;
-  vector<float>* ptdata;
+
+	string table;
+	//string database;
+	//string server;
+	//string username;
+	//string password;
+	int n_lines;
+	int n_cols;
+	vector<float>* ptdata;
 
 public:
 
-  int n_lines;
-  int n_cols;
-
-  Mysqplot(string);
-  ~Mysqplot();
-  bool conn(const char*,const char*,const char*,const char*);
-  bool fill(int,int);
-  float mean(int);
-  float standar_desviation();
-  float variance();
-  bool histogram();
-  bool gaussian_distribution();
-  bool jitterplot();
-  bool scatterplot();
-  bool kde();
-  bool pdf();
-  bool cdf();
+	Mysqplot(string);
+	~Mysqplot();
+  
+	bool conn(const char*,const char*,const char*,const char*);
+	bool fill(int,int);
+	int get_lines();
+	int get_cols();
+  
+	float mean(int);
+	float standar_desviation();
+	float variance();
+  
+	bool histogram();
+	bool gaussian_distribution();
+	bool jitterplot();
+	bool scatterplot();
+	bool kde();
+	bool pdf();
+	bool cdf();
 };
 
 #endif
