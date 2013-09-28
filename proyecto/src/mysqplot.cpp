@@ -1,7 +1,7 @@
 #include "mysqplot.hh"
 
 Mysqplot::Mysqplot(string name){
-  string table = name;
+  table = name;
 }
 Mysqplot::~Mysqplot(){}
 

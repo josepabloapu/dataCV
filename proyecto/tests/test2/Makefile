@@ -10,7 +10,9 @@ all: mysqplot.o
 mysqplot.o : mysqplot.hh mysqplot.cpp
 
 	g++ -Wall -c mysqplot.cpp $(INCPATH) 
+
 clean:
-	
+
+	rm *.o $(PROG)
 
 
