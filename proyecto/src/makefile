@@ -12,4 +12,4 @@ mysqplot.o : mysqplot.cpp mysqplot.hh gnuplot_i.hpp
 	
 clean :
 
-	rm *.o *.exe
+	rm *.o

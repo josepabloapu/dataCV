@@ -17,6 +17,6 @@ $(TARGET) : $(OBJS)
 
 clean:
 
-	rm *.o *.$(EXE)
+	rm *.exe
 
 
