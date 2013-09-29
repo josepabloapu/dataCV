@@ -3,8 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include <stdlib.h>
+#include <stdlib.h>  // no me acuerdo para que esta
 #include <mysql++.h>
+#include <algorithm>  // sort()
 
 using namespace std;
 
@@ -43,7 +44,7 @@ public:
 	bool scatterplot(const char*, const char*);
 	bool kde();
 	bool pdf(const char*);
-	bool cdf();
+	bool cdf(const char*);
 };
 
 #endif

@@ -97,6 +97,8 @@ bool Mysqplot::pdf(const char* str){
 	int flag=0;
 	float ymax=0;
 	float xmax=0;
+	float ymin=0;
+	float xmin=0;
 	
 	this->fill_vector(str,x);
 	
@@ -119,16 +121,69 @@ bool Mysqplot::pdf(const char* str){
 	for(int i=0;i<v2.size();++i){
 		v2[i]=v2[i]/x.size();
 		if (v2[i]>ymax) ymax=v2[i];
+		if (v2[i]<ymin) ymin=v2[i];
 	}
 	
 	for(int i=0;i<v1.size();++i){
 		if (v1[i]>xmax) xmax=v1[i];
+		if (v1[i]<xmin) xmin=v1[i];
 	}
 
 	Gnuplot g1("PDF");
-	g1.set_xrange(0,xmax).set_yrange(0,ymax);
+	g1.set_xrange(xmin,xmax+1).set_yrange(ymin,ymax);
 	g1.set_style("impulses").plot_xy(v1,v2,str);
 	wait_for_key();
 	return true;
 }
+
+bool Mysqplot::cdf(const char* str){	
+	vector<double> x;
+	vector<double> v1,v2;
+	int flag=0;
+	float ymax=0;
+	float xmax=0;
+	float ymin=0;
+	float xmin=0;
 	
+	this->fill_vector(str,x);
+	
+	sort(x.begin(), x.end());
+	
+	v1.push_back(x[0]);
+	v2.push_back((double)1);	
+	for(int i=1;i<x.size();++i){
+		for(int j=0;j<v1.size();++j){
+			if (x[i]==v1[j]){ 
+				flag=1;
+				v2[j]+=1;
+			}					
+		}
+		if (flag==0){ 
+			v1.push_back(x[i]);
+			v2.push_back((double)1);
+		}
+		flag=0;
+	}
+	
+	for(int i=0;i<v2.size();++i){
+		v2[i]=v2[i]/x.size();
+	}
+	
+	for(int i=1;i<v2.size();++i){
+		v2[i]=v2[i]+v2[i-1];
+		if (v2[i]>ymax) ymax=v2[i];
+		if (v2[i]<ymin) ymin=v2[i];
+	}
+	
+	for(int i=0;i<v1.size();++i){
+		if (v1[i]>xmax) xmax=v1[i];
+		if (v1[i]<xmin) xmin=v1[i];
+	}
+	
+	Gnuplot g1("CDF");
+	g1.set_legend("outside right top");
+	g1.set_xrange(xmin,xmax+1).set_yrange(ymin,ymax);
+	g1.set_style("steps").plot_xy(v1,v2,str);
+	wait_for_key();
+	return true;
+}
