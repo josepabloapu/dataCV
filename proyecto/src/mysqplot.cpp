@@ -3,6 +3,16 @@
 
 mysqlpp::StoreQueryResult result_object;
 
+void wait_for_key ()
+{
+    cout << endl << "Press ENTER to continue..." << endl;
+
+    std::cin.clear();
+    std::cin.ignore(std::cin.rdbuf()->in_avail());
+    std::cin.get();
+    return;
+}
+
 Mysqplot::Mysqplot(string name){
   table = name;
 }
@@ -52,5 +62,43 @@ float Mysqplot::mean(const char* str){
 	return mean;
 }
 
-//float mean(vector<double> &m){
+bool Mysqplot::pdf(const char* str){
+	vector<double> x;
+	vector<double> v1,v2;
+	int flag=0;
+	float ymax=0;
+	float xmax=0;
 	
+	this->fill_vector(str,x);
+	
+	v1.push_back(x[0]);
+	v2.push_back((double)1);	
+	for(int i=1;i<x.size();++i){
+		for(int j=0;j<v1.size();++j){
+			if (x[i]==v1[j]){ 
+				flag=1;
+				v2[j]+=1;
+			}					
+		}
+		if (flag==0){ 
+			v1.push_back(x[i]);
+			v2.push_back((double)1);
+		}
+		flag=0;
+	}
+	
+	for(int i=0;i<v2.size();++i){
+		v2[i]=v2[i]/x.size();
+		if (v2[i]>ymax) ymax=v2[i];
+	}
+	
+	for(int i=0;i<v1.size();++i){
+		if (v1[i]>xmax) xmax=v1[i];
+	}
+
+	Gnuplot g1("PDF");
+	g1.set_xrange(0,xmax).set_yrange(0,ymax);
+	g1.set_style("impulses").plot_xy(v1,v2,str);
+	wait_for_key();
+	return true;
+}

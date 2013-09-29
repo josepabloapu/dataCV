@@ -41,7 +41,7 @@ public:
 	bool jitterplot();
 	bool scatterplot();
 	bool kde();
-	bool pdf();
+	bool pdf(const char*);
 	bool cdf();
 };
 
