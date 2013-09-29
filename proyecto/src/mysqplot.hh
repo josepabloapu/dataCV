@@ -40,7 +40,7 @@ public:
 	bool histogram();
 	bool gaussian_distribution();
 	bool jitterplot();
-	bool scatterplot();
+	bool scatterplot(const char*, const char*);
 	bool kde();
 	bool pdf(const char*);
 	bool cdf();
