@@ -114,7 +114,7 @@ bool Mysqplot::gaussian_distribution(const char* str){
 	
 	std::cout << funtion << std::endl;
 	Gnuplot g1("Gaussian Distribution");
-	g1.plot_equation(funtion,"standard deviation");
+	g1.plot_equation(funtion,"Gaussian Distribution");
 	wait_for_key();
 	return true;
 }
