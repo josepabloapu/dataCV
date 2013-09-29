@@ -14,27 +14,28 @@ void wait_for_key ()
     return;
 }
 
-<<<<<<< HEAD
-std::string NumberToString ( int Number )
-  {
+std::string NumberToString (int Number)
+{
     std::ostringstream ss;
     ss << Number;
     return ss.str();
 }
 
-std::string Convert (float Number){
+std::string NumberToString (float Number)
+{
     stringstream ss (stringstream::in | stringstream::out);
     ss << Number;
     return ss.str();
-=======
+}
+
 void minMax(vector<double> &v1,float &min,float &max){
 	for(int i=0;i<v1.size();++i){
 		if (v1[i]>max) max=v1[i];
 		if (v1[i]<min) min=v1[i];
 	}
 	return;
->>>>>>> b1d2ebca9a46178d1cf99540a1a5d8745b11294d
 }
+
 
 Mysqplot::Mysqplot(string name){
   table = name;
@@ -98,25 +99,25 @@ float Mysqplot::standard_deviation(const char* str){
 }
 
 bool Mysqplot::gaussian_distribution(const char* str){
-	float variance = 0; 
-	float mean = 0;
-	variance = Mysqplot::variance(str);
-	mean = Mysqplot::mean(str);
+	float variance_num = 0; 
+	float mean_num = 0;
+	float pi_num = 3.141592654;
+	variance_num = Mysqplot::variance(str);
+	mean_num = Mysqplot::mean(str);
+		
+	std::string variance = NumberToString (variance_num);
+	std::string mean = NumberToString (mean_num);
+	std::string pi = NumberToString (pi_num);
 	
-	variance = NumberToString (variance);
-	mean = NumberToString (mean);
+	string funtion = "(1/(" + variance + "*(2 *" + pi + ")^(0.5)))*exp-(((x-" + mean + ")^2)/(2*(" + variance + ")^2))";
+	//string funtion = "sin(12*x)*exp(-x)";
 	
-	string funtion = "( 1 / ( "+variance+" * pow(2 * pi, 0.5) ) ) * exp ( ( pow(+x - "+mean+", 2) ) / (2 * pow ("+variance+", 2) ) )";
-
-	//funtion = "( 1 / ( varianza * pow(2 * pi, 0.5) ) ) * exp ( ( pow(x - media, 2) ) / (2 * pow (varianza, 2) ) )"
-
-	Gnuplot g1("Standard Desviation");
+	std::cout << funtion << std::endl;
+	Gnuplot g1("Gaussian Distribution");
 	g1.plot_equation(funtion,"standard deviation");
 	wait_for_key();
+	return true;
 }
-
-
-
 
 bool Mysqplot::scatterplot(const char* str1, const char* str2){
 	vector<double> x, y;

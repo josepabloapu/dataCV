@@ -38,7 +38,6 @@ public:
 	float variance(const char*);
 	float standard_deviation(const char*);
 
-  
 	bool histogram();
 	bool gaussian_distribution(const char*);
 	bool jitterplot();
