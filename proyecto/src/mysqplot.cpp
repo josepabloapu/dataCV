@@ -116,6 +116,22 @@ float Mysqplot::standard_deviation(const char* str){
 	return standard_deviation;
 }
 
+bool Mysqplot::scatterplot(const char* str1, const char* str2){
+	vector<double> x, y, v1, v2;
+	float xmax=0;
+	float ymax =0;
+	this->fill_vector(str1, x);
+	this->fill_vector(str2, y);
+	xmax=x[x.size()-1];
+	ymax=y[y.size()-1];
+	Gnuplot g1("Scatterplot");
+	g1.set_xrange(0,xmax).set_yrange(0,ymax);
+	g1.set_style("points").plot_xy(x,y,str1);
+	wait_for_key();
+	return true;
+}
+	
+
 bool Mysqplot::pdf(const char* str){
 	vector<double> x;
 	vector<double> v1,v2;
