@@ -62,7 +62,6 @@ float Mysqplot::mean(const char* str){
 	return mean;
 }
 
-<<<<<<< HEAD
 float Mysqplot::variance(const char* str){
 	float variance = 0;
 	for(int i=0;i<(this->get_lines());++i) variance+=(pow((float)result_object[i][str], 2.0)-pow(this->mean(str), 2.0));
@@ -116,8 +115,4 @@ bool Mysqplot::pdf(const char* str){
 	wait_for_key();
 	return true;
 }
-=======
-
->>>>>>> lalala
-	
 	
