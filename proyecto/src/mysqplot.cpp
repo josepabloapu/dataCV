@@ -1,5 +1,6 @@
 #include "mysqplot.hh"
 #include "gnuplot_i.hpp"
+#include <math.h>
 
 mysqlpp::StoreQueryResult result_object;
 
@@ -50,6 +51,21 @@ float Mysqplot::mean(const char* str){
 	for(int i=0;i<(this->get_lines());++i) mean+=(float)result_object[i][str];
 	mean = mean/this->get_lines();
 	return mean;
+}
+
+float Mysqplot::variance(const char* str){
+	float variance = 0;
+	mean(str); //este mae no se si va aqui
+	for(int i=0;i<(this->get_lines());++i) variance+=(pow((float)result_object[i][str], 2.0)-pow(this->mean(str), 2.0));
+	variance = variance/(this->get_lines()-1);
+	return variance;
+}
+
+float Mysqplot::standard_deviation(const char* str){
+	float standard_deviation = 0;
+	variance(str); //este mae no se si va aqui
+	standard_deviation = pow((float)this->variance(str), 0.5);
+	return standard_deviation;
 }
 
 //float mean(vector<double> &m){

@@ -33,8 +33,9 @@ public:
 	int get_cols();
   
 	float mean(const char*);
-	float standar_desviation();
-	float variance();
+	float variance(const char*);
+	float standard_deviation(const char*);
+
   
 	bool histogram();
 	bool gaussian_distribution();
