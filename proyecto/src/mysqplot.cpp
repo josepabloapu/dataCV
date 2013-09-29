@@ -1,6 +1,6 @@
 #include "mysqplot.hh"
 #include "gnuplot_i.hpp"
-#include <math.h>
+#include <math.h> // funcion pow()
 
 mysqlpp::StoreQueryResult result_object;
 
@@ -14,6 +14,7 @@ void wait_for_key ()
     return;
 }
 
+<<<<<<< HEAD
 std::string NumberToString ( int Number )
   {
     std::ostringstream ss;
@@ -25,6 +26,14 @@ std::string Convert (float Number){
     stringstream ss (stringstream::in | stringstream::out);
     ss << Number;
     return ss.str();
+=======
+void minMax(vector<double> &v1,float &min,float &max){
+	for(int i=0;i<v1.size();++i){
+		if (v1[i]>max) max=v1[i];
+		if (v1[i]<min) min=v1[i];
+	}
+	return;
+>>>>>>> b1d2ebca9a46178d1cf99540a1a5d8745b11294d
 }
 
 Mysqplot::Mysqplot(string name){
@@ -110,16 +119,25 @@ bool Mysqplot::gaussian_distribution(const char* str){
 
 
 bool Mysqplot::scatterplot(const char* str1, const char* str2){
-	vector<double> x, y, v1, v2;
+	vector<double> x, y;
 	float xmax=0;
 	float ymax =0;
+	float ymin=0;
+	float xmin=0;
+	
 	this->fill_vector(str1, x);
 	this->fill_vector(str2, y);
-	xmax=x[x.size()-1];
-	ymax=y[y.size()-1];
+	
+	//xmax=x[x.size()-1];
+	//ymax=y[y.size()-1];
+	
+	minMax(x,xmin,xmax);
+	minMax(y,ymin,ymax);
+	
 	Gnuplot g1("Scatterplot");
-	g1.set_xrange(0,xmax).set_yrange(0,ymax);
-	g1.set_style("points").plot_xy(x,y,str1);
+	g1.set_legend("outside right top");
+	g1.set_xrange(xmin-1,xmax+1).set_yrange(ymin-1,ymax+1);
+	g1.set_style("points").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
 	wait_for_key();
 	return true;
 }
@@ -154,14 +172,17 @@ bool Mysqplot::pdf(const char* str){
 	
 	for(int i=0;i<v2.size();++i){
 		v2[i]=v2[i]/x.size();
-		if (v2[i]>ymax) ymax=v2[i];
-		if (v2[i]<ymin) ymin=v2[i];
+		//if (v2[i]>ymax) ymax=v2[i];
+		//if (v2[i]<ymin) ymin=v2[i];
 	}
 	
-	for(int i=0;i<v1.size();++i){
+	/*for(int i=0;i<v1.size();++i){
 		if (v1[i]>xmax) xmax=v1[i];
 		if (v1[i]<xmin) xmin=v1[i];
-	}
+	}*/
+	
+	minMax(v1,xmin,xmax);
+	minMax(v2,ymin,ymax);
 
 	Gnuplot g1("PDF");
 	g1.set_xrange(xmin,xmax+1).set_yrange(ymin,ymax);
