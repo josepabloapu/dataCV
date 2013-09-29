@@ -14,7 +14,6 @@ bool Mysqplot::conn(const char* database, const char* server, const char* userna
 	mysqlpp::Connection connect_object(true);
 	connect_object.connect(database, server, username, password);
 	mysqlpp::Query query_object = connect_object.query("SELECT * FROM " + table);
-	//mysqlpp::StoreQueryResult result_object = query_object.store();
 	result_object = query_object.store();
 	n_cols = result_object.num_fields();
 	n_lines = result_object.num_rows();
@@ -55,7 +54,6 @@ float Mysqplot::mean(const char* str){
 
 float Mysqplot::variance(const char* str){
 	float variance = 0;
-	mean(str); //este mae no se si va aqui
 	for(int i=0;i<(this->get_lines());++i) variance+=(pow((float)result_object[i][str], 2.0)-pow(this->mean(str), 2.0));
 	variance = variance/(this->get_lines()-1);
 	return variance;
@@ -63,10 +61,7 @@ float Mysqplot::variance(const char* str){
 
 float Mysqplot::standard_deviation(const char* str){
 	float standard_deviation = 0;
-	variance(str); //este mae no se si va aqui
 	standard_deviation = pow((float)this->variance(str), 0.5);
 	return standard_deviation;
 }
-
-//float mean(vector<double> &m){
 	

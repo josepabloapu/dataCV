@@ -16,5 +16,7 @@ int main(){
 	for(int i=0;i<x.size();++i) cout<<x[i]<<endl;
 	for(int i=0;i<y.size();++i) cout<<y[i]<<endl;
 	cout<<"la media es: "<< A.mean("datos") <<endl;
+	cout<<"la varianza es: "<< A.variance("datos") <<endl;
+	cout<<"la desv.est es: "<< A.standard_deviation("datos") <<endl;
 }
  
