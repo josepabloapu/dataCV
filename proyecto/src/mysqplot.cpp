@@ -14,6 +14,19 @@ void wait_for_key ()
     return;
 }
 
+std::string NumberToString ( int Number )
+  {
+    std::ostringstream ss;
+    ss << Number;
+    return ss.str();
+}
+
+std::string Convert (float Number){
+    stringstream ss (stringstream::in | stringstream::out);
+    ss << Number;
+    return ss.str();
+}
+
 Mysqplot::Mysqplot(string name){
   table = name;
 }
@@ -71,10 +84,18 @@ float Mysqplot::variance(const char* str){
 
 float Mysqplot::standard_deviation(const char* str){
 	float standard_deviation = 0;
-	string variance = ""; 
-	string mean = "";	
-	variance = tostr(variance(str));
-	mean = tostr(mean(str));
+	standard_deviation = pow((float)this->variance(str), 0.5);
+	return standard_deviation;
+}
+
+bool Mysqplot::gaussian_distribution(const char* str){
+	float variance = 0; 
+	float mean = 0;
+	variance = Mysqplot::variance(str);
+	mean = Mysqplot::mean(str);
+	
+	variance = NumberToString (variance);
+	mean = NumberToString (mean);
 	
 	string funtion = "( 1 / ( "+variance+" * pow(2 * pi, 0.5) ) ) * exp ( ( pow(+x - "+mean+", 2) ) / (2 * pow ("+variance+", 2) ) )";
 
@@ -83,10 +104,10 @@ float Mysqplot::standard_deviation(const char* str){
 	Gnuplot g1("Standard Desviation");
 	g1.plot_equation(funtion,"standard deviation");
 	wait_for_key();
-
-	standard_deviation = pow((float)this->variance(str), 0.5);
-	return standard_deviation;
 }
+
+
+
 
 bool Mysqplot::scatterplot(const char* str1, const char* str2){
 	vector<double> x, y, v1, v2;

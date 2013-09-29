@@ -6,6 +6,7 @@
 #include <stdlib.h>  // no me acuerdo para que esta
 #include <mysql++.h>
 #include <algorithm>  // sort()
+#include <sstream>
 
 using namespace std;
 
@@ -39,7 +40,7 @@ public:
 
   
 	bool histogram();
-	bool gaussian_distribution();
+	bool gaussian_distribution(const char*);
 	bool jitterplot();
 	bool scatterplot(const char*, const char*);
 	bool kde();
