@@ -71,6 +71,47 @@ float Mysqplot::variance(const char* str){
 
 float Mysqplot::standard_deviation(const char* str){
 	float standard_deviation = 0;
+	string variance = ""; 
+	string mean = "";	
+	variance = tostr(variance(str));
+	mean = tostr(mean(str));
+	
+	string funtion = "( 1 / ( "+variance+" * pow(2 * pi, 0.5) ) ) * exp ( ( pow("+tostr(x[i])" - "+mean+", 2) ) / (2 * pow ("+variance+", 2) ) )";
+
+	vector<double> x;
+	vector<double> v1,v2;
+	int flag=0;
+	float ymax=0;
+	float xmax=0;
+	float ymin=0;
+	float xmin=0;
+	
+	this->fill_vector(str,x);
+
+	v1.push_back(x[0]);
+	v2.push_back(funtion);	
+	for(int i=1;i<x.size();++i){
+		for(int j=0;j<v1.size();++j){
+			if (x[i]==v1[j]){ 
+				flag=1;
+				v2[j]+=1;
+			}					
+		}
+		if (flag==0){ 
+			v1.push_back(x[i]);
+			v2.push_back(funtion);
+		}
+		flag=0;
+	}
+
+	
+	//funtion = "( 1 / ( varianza * pow(2 * pi, 0.5) ) ) * exp ( ( pow(x - media, 2) ) / (2 * pow (varianza, 2) ) )"
+
+	Gnuplot g1("Standard Desviation");
+	g1.set_xrange(xmin,xmax+1).set_yrange(ymin,ymax);
+	g1.plot_equation(funtion,"standard deviation");
+	wait_for_key();
+
 	standard_deviation = pow((float)this->variance(str), 0.5);
 	return standard_deviation;
 }
