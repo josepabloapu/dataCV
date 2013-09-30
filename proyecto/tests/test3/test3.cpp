@@ -8,8 +8,17 @@ int main(){
 	A.pdf("datos");
 	A.cdf("datos");*/
 	
-	Mysqplot B ("scatter");
+	/*Mysqplot B ("scatter");
 	B.conn("data", "localhost", "root", "root");
 	B.scatterplot("x","y");
+	*/
+	Mysqplot C ("gauss");
+	C.conn("data", "localhost", "root", "root");
+	//C.mean("datos");
+	C.pdf("datos",false);
+	C.gaussian_distribution("datos");
+	C.pdf("datos",true);
+	C.cdf("datos");
+	
 	return 0;
 }

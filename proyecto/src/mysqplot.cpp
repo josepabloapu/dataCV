@@ -99,22 +99,12 @@ float Mysqplot::standard_deviation(const char* str){
 }
 
 bool Mysqplot::gaussian_distribution(const char* str){
-	float variance_num = 0; 
-	float mean_num = 0;
-	float pi_num = 3.141592654;
-	variance_num = Mysqplot::variance(str);
-	mean_num = Mysqplot::mean(str);
-		
-	std::string variance = NumberToString (variance_num);
-	std::string mean = NumberToString (mean_num);
-	std::string pi = NumberToString (pi_num);
 	
-	string funtion = "(1/(" + variance + "*(2 *" + pi + ")^(0.5)))*exp-(((x-" + mean + ")^2)/(2*(" + variance + ")^2))";
-	//string funtion = "sin(12*x)*exp(-x)";
+	string function = this->gaussian_distribution_function(str);
 	
-	std::cout << funtion << std::endl;
 	Gnuplot g1("Gaussian Distribution");
-	g1.plot_equation(funtion,"Gaussian Distribution");
+	g1.set_style("lines");
+	g1.plot_equation(function,"Gaussian Distribution");
 	wait_for_key();
 	return true;
 }
@@ -129,23 +119,27 @@ bool Mysqplot::scatterplot(const char* str1, const char* str2){
 	this->fill_vector(str1, x);
 	this->fill_vector(str2, y);
 	
-	//xmax=x[x.size()-1];
-	//ymax=y[y.size()-1];
-	
 	minMax(x,xmin,xmax);
 	minMax(y,ymin,ymax);
 	
 	Gnuplot g1("Scatterplot");
 	g1.set_legend("outside right top");
+	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
+	g1.set_style("lines").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
+
+/*<<<<<<< HEAD
 	g1.set_xrange(xmin-1,xmax+1).set_yrange(ymin-1,ymax+1);
 	g1.set_style("lines").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
+=======
+	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
+>>>>>>> 6f04e25693fa36541b36ff2af9ef03545c7ea00d */
 	g1.set_style("points").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
 	wait_for_key();
 	return true;
 }
 	
 
-bool Mysqplot::pdf(const char* str){
+bool Mysqplot::pdf(const char* str,bool gauss){
 	vector<double> x;
 	vector<double> v1,v2;
 	int flag=0;
@@ -174,22 +168,26 @@ bool Mysqplot::pdf(const char* str){
 	
 	for(int i=0;i<v2.size();++i){
 		v2[i]=v2[i]/x.size();
-		//if (v2[i]>ymax) ymax=v2[i];
-		//if (v2[i]<ymin) ymin=v2[i];
 	}
-	
-	/*for(int i=0;i<v1.size();++i){
-		if (v1[i]>xmax) xmax=v1[i];
-		if (v1[i]<xmin) xmin=v1[i];
-	}*/
 	
 	minMax(v1,xmin,xmax);
 	minMax(v2,ymin,ymax);
 
-	Gnuplot g1("PDF");
-	g1.set_xrange(xmin,xmax+1).set_yrange(ymin,ymax);
-	g1.set_style("impulses").plot_xy(v1,v2,str);
-	wait_for_key();
+	if(gauss==false){
+		Gnuplot g1("PDF");
+		g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.25*ymin),ymax+(0.25*ymax));
+		g1.set_style("impulses").plot_xy(v1,v2,str);
+		wait_for_key();
+	}
+	else{		
+		string gauss=this->gaussian_distribution_function(str);
+		
+		Gnuplot g1("PDF");
+		g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.25*ymin),ymax+(0.25*ymax));
+		g1.set_style("impulses").plot_xy(v1,v2,str);
+		g1.set_style("lines").plot_equation(gauss,"Gaussian Distribution");
+		wait_for_key();
+	}
 	return true;
 }
 
@@ -228,19 +226,29 @@ bool Mysqplot::cdf(const char* str){
 	
 	for(int i=1;i<v2.size();++i){
 		v2[i]=v2[i]+v2[i-1];
-		if (v2[i]>ymax) ymax=v2[i];
-		if (v2[i]<ymin) ymin=v2[i];
 	}
 	
-	for(int i=0;i<v1.size();++i){
-		if (v1[i]>xmax) xmax=v1[i];
-		if (v1[i]<xmin) xmin=v1[i];
-	}
+	minMax(v1,xmin,xmax);
+	minMax(v2,ymin,ymax);
 	
 	Gnuplot g1("CDF");
 	g1.set_legend("outside right top");
-	g1.set_xrange(xmin,xmax+1).set_yrange(ymin,ymax);
+	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.25*ymin),ymax+(0.25*ymax));
 	g1.set_style("steps").plot_xy(v1,v2,str);
 	wait_for_key();
 	return true;
 }
+
+string Mysqplot::gaussian_distribution_function(const char* str){
+	float variance_num = 0; 
+	float mean_num = 0;
+	string pi = "3.141592654";
+	variance_num = this->variance(str);
+	mean_num = this->mean(str);
+	
+	std::string variance = NumberToString (variance_num);
+	std::string mean = NumberToString (mean_num);
+	
+	string function = "(1/((2*pi*"+variance+")**(0.5)))*exp(-((x-"+mean+")**2)/(2*"+variance+"))";
+	return function;
+}	

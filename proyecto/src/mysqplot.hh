@@ -43,8 +43,10 @@ public:
 	bool jitterplot();
 	bool scatterplot(const char*, const char*);
 	bool kde();
-	bool pdf(const char*);
+	bool pdf(const char*,bool=false);
 	bool cdf(const char*);
+	
+	string gaussian_distribution_function(const char*);
 };
 
 #endif
