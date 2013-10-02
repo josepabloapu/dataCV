@@ -1,10 +1,10 @@
-#include "../../src/mysqplot.hh"
+#include "../../include/mysqplot.hh"
 
 using namespace std;
 
 int main(){
-	Mysqplot A ("table1");
-	A.conn("test", "localhost", "root", "root");
-	A.gaussian_distribution("datos");
+	Mysqplot A ("jitter");
+	A.conn("data", "test", "localhost", "root", "root");
+	A.histogram("data", 3);
 	return 0;
 }
