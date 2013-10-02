@@ -69,6 +69,22 @@ bool Mysqplot::conn(const char* database, const char* server, const char* userna
 	return true;
 }
 
+bool Mysqplot::conn(const char* field, const char* database, const char* server, const char* username, const char* password){
+	string query = "";
+	query = "SELECT *";
+	query = query + ", COUNT(*) AS repetitions FROM ";
+	query = query + table;
+	query = query + " GROUP BY " + field + " ORDER BY " + field;
+
+	mysqlpp::Connection connect_object(true);
+	connect_object.connect(database, server, username, password);
+	mysqlpp::Query query_object = connect_object.query(query);
+	result_object = query_object.store();
+	n_cols = result_object.num_fields();
+	n_lines = result_object.num_rows();
+	return true;
+}
+
 bool Mysqplot::fill_vector(int inicio, int fin, const char* col_name, vector<double> &m){
 	for(int i=inicio; i<=fin; ++i) {
 		// en este caso "col_name" es el nombre de la columna
@@ -174,6 +190,30 @@ float Mysqplot::standard_deviation(const char* str){
 	float standard_deviation = 0;
 	standard_deviation = pow((float)this->variance(str), 0.5);
 	return standard_deviation;
+}
+
+bool Mysqplot::histogram(const char* str1, int cols){
+	vector<double> x, y;
+	const char* str2 = "repetitions";
+	float xmax=0;
+	float ymax =0;
+	float ymin=0;
+	float xmin=0;
+
+	this->fill_vector(str1, x);
+	this->fill_vector(str2, y);
+
+	minMax(x,xmin,xmax);
+	minMax(y,ymin,ymax);
+
+	Gnuplot g1("Histogram");
+	g1.set_legend("outside right top");
+	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
+	g1.set_style("points").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
+	
+	wait_for_key();
+	return true;
+
 }
 
 bool Mysqplot::gaussian_distribution(const char* str){

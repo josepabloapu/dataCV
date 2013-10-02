@@ -30,6 +30,16 @@ public:
 	~Mysqplot();
   	///connects to mysql server
 	bool conn(const char*,const char*,const char*,const char*); 
+
+
+
+	///creo q esto es un problema 
+	///pero a como lo estoy haciendo hay q crear una conexion diferente 
+	///para el histograma
+	bool conn(const char*,const char*,const char*,const char*,const char*);
+	
+
+
 	///
 	bool fill_vector(int,int, const char*, vector<double> &);
 	///
@@ -47,7 +57,7 @@ public:
 	/// obtain standar deviation value of a field
 	float standard_deviation(const char*);
 	///
-	bool histogram();
+	bool histogram(const char*,int);
 	/// displays a gaussian distributions of a field
 	bool gaussian_distribution(const char*);
 	/// displays a jitterplot of a field
