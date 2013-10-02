@@ -24,3 +24,7 @@
 
 #Executable files
 *.exe
+
+#Doxygen output
+proyecto/doc/html
+proyecto/doc/latex
