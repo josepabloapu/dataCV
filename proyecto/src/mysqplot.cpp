@@ -200,32 +200,24 @@ bool Mysqplot::scatterplot(const char* str1, const char* str2){
 	
 	minMax(x,xmin,xmax);
 	minMax(y,ymin,ymax);
-	////
+	
 	for(int i=0;i<(int)x.size();++i){
 	Sx+=x[i];
 	Sy+=y[i];
 	Sxx+=x[i]*x[i];
 	Sxy+=x[i]*y[i];
 	}
-	cout<< Sx << endl;
-	cout<< Sy << endl;
-	cout<< Sxy << endl;
-	cout<< Sxx << endl;
 
 	float m=((x.size())*Sxy-Sx*Sy)/((x.size())*Sxx-Sx*Sx);
 	float b=(Sxx*Sy-Sx*Sxy)/((x.size())*Sxx-Sx*Sx);
 	
-	cout << "La pendiente es: " << m << ". La intersección es: " << b <<endl;
+	cout << "y = " << m << "x + " << b << endl;
 	
-	////
 	Gnuplot g1("Scatterplot");
 	g1.set_legend("outside right top");
 	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
-	//g1.set_style("lines").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
-	g1.set_style("lines").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
-	cout << "y = " << m << "x + " << b << endl;
-	g1.plot_slope(m,b,"Recta del mejor ajuste");
-	//g1.plot_slope(m,b,"y= "+(string)m+"x + "+(string)b+".");
+	g1.set_style("points").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
+	g1.set_style("lines").plot_slope(m,b,"y="+NumberToString(m)+"x+"+NumberToString(b));
 	wait_for_key();
 	return true;
 }
@@ -243,9 +235,9 @@ bool Mysqplot::jitterplot(const char* str, int delta){
 	minMax(x,xmin,xmax);
 
 	Gnuplot g1("Jitterplot");
-	g1.unset_legend();
+	g1.cmd("unset ytics");
 	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
-	g1.set_style("points").plot_xy(x,y,"jitterplot");
+	g1.set_style("points").plot_xy(x,y,str);
 	
 	wait_for_key();
 	

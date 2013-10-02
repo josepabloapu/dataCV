@@ -28,9 +28,14 @@ int main(){
 	D.kde("datos",0.5);
 	D.kde("datos",1.5);
 	
-	Mysqplot C ("jitter");
+	/*Mysqplot C ("jitter");
 	C.conn("test", "localhost", "root", "root");
-	C.jitterplot("data",1);
+	C.jitterplot("data",1);*/
+	
+	Mysqplot C ("scatter2");
+	C.conn("data", "localhost", "root", "root");
+	//C.jitterplot("datos",1);
+	C.scatterplot("x","y");
 	
 	return 0;
 }
