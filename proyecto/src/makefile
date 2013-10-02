@@ -6,7 +6,7 @@ DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG)
 LFLAGS = -L/usr/local/lib
 
-mysqplot.o : mysqplot.cpp mysqplot.hh gnuplot_i.hpp 
+mysqplot.o : mysqplot.cpp #../include/mysqplot.hh ../include/gnuplot_i.hpp 
 
 	$(CC) $(CFLAGS) -ggdb -DDEBUGGA $(LFLAGS) $(INCPATH) $(LIBS) $(OBJS)
 	

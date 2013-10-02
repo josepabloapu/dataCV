@@ -1,5 +1,5 @@
-#include "mysqplot.hh"
-#include "gnuplot_i.hpp"
+#include "../include/mysqplot.hh"
+#include "../include/gnuplot_i.hpp"
 #include <math.h> // funcion pow()
 
 mysqlpp::StoreQueryResult result_object;
