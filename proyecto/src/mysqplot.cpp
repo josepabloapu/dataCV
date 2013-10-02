@@ -68,6 +68,15 @@ bool Mysqplot::fill_vector(const char* col_name, vector<double> &m){
 	return true;
 }
 
+bool Mysqplot::fill_vector(const char* col_name, vector<double> &m, int delta){
+	float LO = 5-delta;
+	float HI = 5+delta;
+	for(int i=0; i<(this->get_lines()); ++i) {
+        m.push_back(LO + (float)rand()/((float)RAND_MAX/(HI-LO)));
+    	}    
+	return true;
+}
+
 int Mysqplot::get_lines(){
 	int n = this->n_lines;
 	return n;
@@ -125,10 +134,30 @@ bool Mysqplot::scatterplot(const char* str1, const char* str2){
 	Gnuplot g1("Scatterplot");
 	g1.set_legend("outside right top");
 	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
-	g1.set_style("lines").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
+	//g1.set_style("lines").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
 	g1.set_style("points").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
 	wait_for_key();
 	return true;
+}
+
+bool Mysqplot::jitterplot(const char* str, int delta){
+	vector<double> x;
+	vector<double> y;
+	float xmax=0;
+	float xmin=0;
+	float ymax=20;
+	float ymin=0;
+	
+	this->fill_vector(str,x);
+	this->fill_vector(str,y,delta);
+	minMax(x,xmin,xmax);
+
+	Gnuplot g1("Jitterplot");
+	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
+	g1.set_style("points").plot_xy(x,y,"jitterplot");
+	g1.unset_legend();
+	wait_for_key();
+	
 }
 	
 

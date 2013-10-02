@@ -7,6 +7,7 @@
 #include <mysql++.h>
 #include <algorithm>  // sort()
 #include <sstream>
+//#include <cstdlib>
 
 using namespace std;
 
@@ -31,6 +32,7 @@ public:
 	bool conn(const char*,const char*,const char*,const char*);
 	bool fill_vector(int,int, const char*, vector<double> &);
 	bool fill_vector(const char*, vector<double> &);
+	bool fill_vector(const char*, vector<double> &, int);
 	int get_lines();
 	int get_cols();
   
@@ -40,7 +42,7 @@ public:
 
 	bool histogram();
 	bool gaussian_distribution(const char*);
-	bool jitterplot();
+	bool jitterplot(const char*, int);
 	bool scatterplot(const char*, const char*);
 	bool kde();
 	bool pdf(const char*,bool=false);
