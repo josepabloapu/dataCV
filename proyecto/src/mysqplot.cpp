@@ -235,9 +235,10 @@ bool Mysqplot::jitterplot(const char* str, int delta){
 	minMax(x,xmin,xmax);
 
 	Gnuplot g1("Jitterplot");
+	g1.unset_legend();
 	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
 	g1.set_style("points").plot_xy(x,y,"jitterplot");
-	g1.unset_legend();
+	
 	wait_for_key();
 	
 }

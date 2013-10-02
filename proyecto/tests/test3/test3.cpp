@@ -1,4 +1,4 @@
-#include "../../src/mysqplot.hh"
+#include "../../include/mysqplot.hh"
 
 using namespace std;
 
