@@ -7,7 +7,7 @@
 #include <mysql++.h>
 #include <algorithm>  // sort()
 #include <sstream>
-//#include <cstdlib>
+#include <cmath> // abs(float)
 
 using namespace std;
 
@@ -39,6 +39,7 @@ public:
 	float mean(const char*);
 	float variance(const char*);
 	float standard_deviation(const char*);
+	double kolmogorov_test_uniform(const char*,float,float);
 
 	bool histogram();
 	bool gaussian_distribution(const char*);
@@ -47,6 +48,7 @@ public:
 	bool kde(const char*,float=1.0);
 	bool pdf(const char*,bool=false);
 	bool cdf(const char*);
+	
 	
 	string gaussian_distribution_function(const char*);
 };

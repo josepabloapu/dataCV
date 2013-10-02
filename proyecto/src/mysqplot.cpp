@@ -240,7 +240,7 @@ bool Mysqplot::jitterplot(const char* str, int delta){
 	g1.set_style("points").plot_xy(x,y,str);
 	
 	wait_for_key();
-	
+	return true;
 }
 	
 
@@ -398,4 +398,65 @@ string Mysqplot::gaussian_distribution_function(const char* str){
 	
 	string function = "(1/((2*pi*"+variance+")**(0.5)))*exp(-((x-"+mean+")**2)/(2*"+variance+"))";
 	return function;
+}
+
+double Mysqplot::kolmogorov_test_uniform(const char* str,float a,float b){
+	vector<double> x;
+	vector<double> v1,v2;
+	int flag=0;
+	double** hy_pt;
+	double Dn=0;
+	
+	this->fill_vector(str,x);
+	
+	sort(x.begin(), x.end());
+	
+	v1.push_back(x[0]);
+	v2.push_back((double)1);	
+	for(int i=1;i<(int)x.size();++i){
+		for(int j=0;j<(int)v1.size();++j){
+			if (x[i]==v1[j]){ 
+				flag=1;
+				v2[j]+=1;
+			}					
+		}
+		if (flag==0){ 
+			v1.push_back(x[i]);
+			v2.push_back((double)1);
+		}
+		flag=0;
+	}
+	
+	for(int i=0;i<(int)v2.size();++i){
+		v2[i]=v2[i]/x.size();
+	}
+	
+	for(int i=1;i<(int)v2.size();++i){
+		v2[i]=v2[i]+v2[i-1];
+	}
+
+	hy_pt = new double* [v1.size()];
+	
+	for(int i=0;i<(int)v1.size();++i){
+		hy_pt[i]=new double[2];
+	}
+	
+	for(int i=0;i<(int)v1.size();++i){
+		hy_pt[i][0]=v1[i];
+		if(v1[i]<a)
+			hy_pt[i][1]=0;
+		if((v1[i]>=a) && (v1[i]<b))
+			hy_pt[i][1]=(v1[i]-a)/(b-a);
+		if(v1[i]>=b)
+			hy_pt[i][1]=1;
+	}
+	
+	for(int i=0;i<(int)v1.size();++i){
+		double temp;
+		temp = abs(v2[i]-hy_pt[i][1]);
+		if (temp>Dn) Dn=temp;
+	}
+	
+	return Dn; 
+	
 }
