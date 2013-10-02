@@ -7,6 +7,7 @@ OBJS = test3.cpp
 TARGET = test3
 
 all : 
+
 	cd ../../src/ && $(MAKE)
 	$(MAKE) $(TARGET)
 

@@ -4,6 +4,9 @@
 
 mysqlpp::StoreQueryResult result_object;
 
+////////////////////////////////////////////////////////////////
+// Estas funciones deberian ir en un header aparte
+
 void wait_for_key ()
 {
     cout << endl << "Press ENTER to continue..." << endl;
@@ -28,14 +31,27 @@ std::string NumberToString (float Number)
     return ss.str();
 }
 
+std::string step (float a){
+	return "x>"+NumberToString(a)+" ? 1 : 0";
+}
+
 void minMax(vector<double> &v1,float &min,float &max){
-	for(int i=0;i<v1.size();++i){
+	for(int i=0;i<(int)v1.size();++i){
 		if (v1[i]>max) max=v1[i];
 		if (v1[i]<min) min=v1[i];
 	}
 	return;
 }
 
+string normal_standard_density(float shift,float scale){
+	string sh = NumberToString (shift);
+	string sc = NumberToString (scale);
+	
+	string function = "(1/("+sc+"*(2*pi)**(0.5)))*exp(-((((x-"+sh+")/"+sc+")**2)/2))";
+	return function;
+}
+
+///////////////////////////////////////////////////////////////////
 
 Mysqplot::Mysqplot(string name){
   table = name;
@@ -79,22 +95,17 @@ int Mysqplot::get_cols(){
 }
 
 float Mysqplot::mean(const char* str){
-	float mean = 0;
-	/////
+	float mean = 0.0;
 	vector<double> x;
 	vector<double> v1,v2;
 	int flag=0;
-	float ymax=0;
-	float xmax=0;
-	float ymin=0;
-	float xmin=0;
 	
 	this->fill_vector(str,x);
 	
 	v1.push_back(x[0]);
 	v2.push_back((double)1);	
-	for(int i=1;i<x.size();++i){
-		for(int j=0;j<v1.size();++j){
+	for(int i=1;i<(int)x.size();++i){
+		for(int j=0;j<(int)v1.size();++j){
 			if (x[i]==v1[j]){ 
 				flag=1;
 				v2[j]+=1;
@@ -107,32 +118,27 @@ float Mysqplot::mean(const char* str){
 		flag=0;
 	}
 	
-	for(int i=0;i<v2.size();++i){
+	for(int i=0;i<(int)v2.size();++i){
 		v2[i]=v2[i]/x.size();
 	}
-	////
-	for(int i=0;i<(this->get_lines());++i) mean+=v2[i]*v1[i];  //(float)result_object[i][str];
-	//mean = mean/this->get_lines();
+	
+	for(int i=0;i<(int)v1.size();++i) mean+=v2[i]*v1[i]; 
 	return mean;
 }
 
 float Mysqplot::variance(const char* str){
-	float variance = 0;
-	//////
+	float variance = 0.0;
+	float mean = this->mean(str);
 	vector<double> x;
 	vector<double> v1,v2;
 	int flag=0;
-	float ymax=0;
-	float xmax=0;
-	float ymin=0;
-	float xmin=0;
 	
 	this->fill_vector(str,x);
 	
 	v1.push_back(x[0]);
 	v2.push_back((double)1);	
-	for(int i=1;i<x.size();++i){
-		for(int j=0;j<v1.size();++j){
+	for(int i=1;i<(int)x.size();++i){
+		for(int j=0;j<(int)v1.size();++j){
 			if (x[i]==v1[j]){ 
 				flag=1;
 				v2[j]+=1;
@@ -145,11 +151,13 @@ float Mysqplot::variance(const char* str){
 		flag=0;
 	}
 	
-	for(int i=0;i<v2.size();++i){
+	for(int i=0;i<(int)v2.size();++i){
 		v2[i]=v2[i]/x.size();
 	}
-	///////
-	for(int i=0;i<(this->get_lines());++i) variance+=v2[i]*pow((v1[i]-this->mean(str)), 2); 
+		
+	for(int i=0;i<(int)v2.size();++i)
+		variance+=v2[i]*pow((v1[i]-mean), 2);
+	
 	return variance;
 }
 
@@ -184,7 +192,7 @@ bool Mysqplot::scatterplot(const char* str1, const char* str2){
 	minMax(x,xmin,xmax);
 	minMax(y,ymin,ymax);
 	////
-	for(int i=0;i<x.size();++i){
+	for(int i=0;i<(int)x.size();++i){
 	Sx+=x[i];
 	Sy+=y[i];
 	Sxx+=x[i]*x[i];
@@ -227,8 +235,8 @@ bool Mysqplot::pdf(const char* str,bool gauss){
 	
 	v1.push_back(x[0]);
 	v2.push_back((double)1);	
-	for(int i=1;i<x.size();++i){
-		for(int j=0;j<v1.size();++j){
+	for(int i=1;i<(int)x.size();++i){
+		for(int j=0;j<(int)v1.size();++j){
 			if (x[i]==v1[j]){ 
 				flag=1;
 				v2[j]+=1;
@@ -241,7 +249,7 @@ bool Mysqplot::pdf(const char* str,bool gauss){
 		flag=0;
 	}
 	
-	for(int i=0;i<v2.size();++i){
+	for(int i=0;i<(int)v2.size();++i){
 		v2[i]=v2[i]/x.size();
 	}
 	
@@ -270,10 +278,9 @@ bool Mysqplot::cdf(const char* str){
 	vector<double> x;
 	vector<double> v1,v2;
 	int flag=0;
-	float ymax=0;
 	float xmax=0;
-	float ymin=0;
 	float xmin=0;
+	string function="";
 	
 	this->fill_vector(str,x);
 	
@@ -281,8 +288,8 @@ bool Mysqplot::cdf(const char* str){
 	
 	v1.push_back(x[0]);
 	v2.push_back((double)1);	
-	for(int i=1;i<x.size();++i){
-		for(int j=0;j<v1.size();++j){
+	for(int i=1;i<(int)x.size();++i){
+		for(int j=0;j<(int)v1.size();++j){
 			if (x[i]==v1[j]){ 
 				flag=1;
 				v2[j]+=1;
@@ -295,35 +302,78 @@ bool Mysqplot::cdf(const char* str){
 		flag=0;
 	}
 	
-	for(int i=0;i<v2.size();++i){
+	for(int i=0;i<(int)v2.size();++i){
 		v2[i]=v2[i]/x.size();
 	}
 	
-	for(int i=1;i<v2.size();++i){
-		v2[i]=v2[i]+v2[i-1];
+	minMax(v1,xmin,xmax);
+	
+	for(int i=0;i<(int)v2.size();++i)
+		function+="+"+NumberToString((float)v2[i])+"*("+step(v1[i])+")";
+		
+	Gnuplot g1("CDF");
+	g1.set_legend("outside right top");
+	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(-0.2,1.2);
+	g1.set_style("steps").plot_equation(function,str);
+	wait_for_key();
+	return true;
+}
+
+bool Mysqplot::kde(const char* str, float bandwidth){
+	vector<double> x;
+	vector<double> v1,v2;
+	int flag=0;
+	float ymax=0;
+	float xmax=0;
+	float ymin=0;
+	float xmin=0;
+	vector<string> kernels;
+	string result="";
+	
+	this->fill_vector(str,x);
+	
+	v1.push_back(x[0]);
+	v2.push_back((double)1);	
+	for(int i=1;i<(int)x.size();++i){
+		for(int j=0;j<(int)v1.size();++j){
+			if (x[i]==v1[j]){ 
+				flag=1;
+				v2[j]+=1;
+			}					
+		}
+		if (flag==0){ 
+			v1.push_back(x[i]);
+			v2.push_back((double)1);
+		}
+		flag=0;
 	}
 	
+	for(int i=0;i<(int)v1.size();i++){
+		kernels.push_back(NumberToString((float)v2[i])+"*"+
+					normal_standard_density((float)v1[i],bandwidth));
+	}
+		
 	minMax(v1,xmin,xmax);
 	minMax(v2,ymin,ymax);
 	
-	Gnuplot g1("CDF");
+	for(int i=0;i<(int)kernels.size();i++) result+="+"+kernels[i];
+	
+	Gnuplot g1("KDE");
 	g1.set_legend("outside right top");
-	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.25*ymin),ymax+(0.25*ymax));
-	g1.set_style("steps").plot_xy(v1,v2,str);
+	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(0,ymax);
+	g1.set_style("lines").plot_equation(result,str);
+	
 	wait_for_key();
 	return true;
 }
 
 string Mysqplot::gaussian_distribution_function(const char* str){
-	float variance_num = 0; 
-	float mean_num = 0;
-	string pi = "3.141592654";
-	variance_num = this->variance(str);
-	mean_num = this->mean(str);
-	
+	float variance_num = this->variance(str);
+	float mean_num = this->mean(str);
+
 	std::string variance = NumberToString (variance_num);
 	std::string mean = NumberToString (mean_num);
 	
 	string function = "(1/((2*pi*"+variance+")**(0.5)))*exp(-((x-"+mean+")**2)/(2*"+variance+"))";
 	return function;
-}	
+}

@@ -42,7 +42,7 @@ public:
 	bool gaussian_distribution(const char*);
 	bool jitterplot();
 	bool scatterplot(const char*, const char*);
-	bool kde();
+	bool kde(const char*,float=1.0);
 	bool pdf(const char*,bool=false);
 	bool cdf(const char*);
 	
