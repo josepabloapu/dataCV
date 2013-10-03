@@ -1,0 +1,89 @@
+%% LaTeX Document
+%% Author: Jose Pablo Apú, Jose Carlos Campos, Jorge Soto
+%% Document Class
+\documentclass[11pt]{article}
+%%*************************************************************************
+%% Most used packages
+\usepackage{graphicx}				%%include figures
+\usepackage[utf8]{inputenc}			%%include latin characters
+\usepackage[english]{babel}			%%spanish
+\usepackage[vmargin=4cm,			%%margins
+	    tmargin=3cm,
+	    hmargin=2cm,
+	    letterpaper]{geometry}
+\usepackage{color}				%%include colors
+\usepackage{fancyhdr}				%%use fancy headers and footes
+\usepackage{framed}				%%framed boxes
+\usepackage{hyperref}				%%make hyperlinks
+\usepackage{listings}				%%
+%%*************************************************************************
+%% Other settings
+\definecolor{shadecolor}{rgb}{1,0.8,0.3}	%%boxes color
+\setlength{\parindent}{0pt}			%%indemptation
+\pagestyle{fancy}				%%needed to include fancy styles
+\renewcommand{\headrulewidth}{0.25mm}		%%linewidth of the headers
+\pagenumbering{gobble}				%%remove the page number
+\graphicspath{{../../multimedia/imagenes/}}	%%multimedia path
+\definecolor{shadecolor}{RGB}{250,250,250}	%%boxes color
+\lstset{
+	basicstyle=\ttfamily,
+	keywordstyle=\color{black},
+	commentstyle=\color{black},
+	stringstyle=\color{black},
+	tabsize=2,
+	backgroundcolor=\color{shadecolor}}
+%%*************************************************************************
+%% Fancy Header
+%% EIE's template
+\fancyhead[L]{\includegraphics[scale=0.15]{ucr}}
+\fancyhead[C]{UNIVERSIDAD DE COSTA RICA\\
+	      ESCUELA DE INGENIERÍA ELECTRICA\\
+	      ESTRUCTURAS ABSTRACTAS DE DATOS Y ALGORITMOS\\
+	      PARA INGENIERIA - IE0217\\
+	      PROYECTO I - GUÍA DE INSTALACIÓN}
+\fancyhead[R]{\includegraphics[scale=0.4]{eie}}
+\pagestyle{fancy}
+\setlength{\headheight}{60pt}
+%%*************************************************************************
+\begin{document}
+
+\begin{center}
+{ \huge \bfseries Data Computing Visualization Library }\\[0.2cm]
+{ Jose Carlos Campos - Jose Pablo Apu - Jorge Soto }\\[0.2cm]
+\rule{\linewidth}{0.25mm}
+\end{center}
+
+\subsection*{Introducción}
+Estas instrucciones son basadas en la distribución de debian, sirve tanto para la estable como para la versión testing, pero sirve para otras distribuciones. Mysqplot es un wrapper de mysql++ y gnuplot-cpp, por lo que hay que estar seguros de haber instalado ambas previamente. 
+
+\subsection*{Dependencias}
+\begin{itemize}
+\item mysql++\\
+\begin{itemize}
+\item download the source files from \url{http://tangentsoft.net/mysql++/}
+\item make sure you have installed libmysql++-dev
+\item to know the path of the mysql-lib you can make a locate after doing an updatedb
+\end{itemize}
+\begin{lstlisting}
+./configure --with-mysql-lib=/PATH/OF/THE/MYSQL-LIB
+make
+sudo make install
+\end{lstlisting}
+\item gnuplot-cpp\\
+
+\begin{lstlisting}
+sudo apt-get install gnuplot-x11
+\end{lstlisting}
+\end{itemize}
+%% References
+\begin{thebibliography}{10}
+\bibitem{tangent}\url{http://tangentsoft.net/mysql++/}
+\bibitem{opengl}\url{http://www.opengl.org/}
+\bibitem{sfml}\url{http://www.sfml-dev.org/}
+\bibitem{oreilly}Steele, J., \textit{Why data visualization matters}, 
+		\url{http://strata.oreilly.com/2012/02/why-data-visualization-matters.html}
+\bibitem{dundas}Dundas Data Visualization, Inc., \textit{Making Business Decisions Easier with Data Visualizations}
+		\url{http://www.dundas.com/discover/article/making-business-decisions-easier-with-data-visualizations/}
+\end{thebibliography}
+%%*************************************************************************	
+\end{document}

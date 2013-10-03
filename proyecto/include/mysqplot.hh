@@ -3,9 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include <stdlib.h>  	// no me acuerdo para que esta
+#include <stdlib.h>  		// no me acuerdo para que esta
 #include <mysql++.h>
-#include <algorithm>  	// for sort()
+#include <algorithm>  		// for sort()
 #include <sstream> 		// for ostringstream
 #include <cmath> 		// for abs(float) and pow()
 
@@ -28,10 +28,15 @@ public:
 	// Constructor & Destructor
 	///\brief set the mysql table name during construction
 	Mysqplot(string);
+	///\brief mysql table destructor
 	~Mysqplot();
   	
   	// Member functions
   	///\brief connects to mysql server
+	///\param database name of the database 
+	///\param host name of the host usually named localhost
+	///\param username
+	///\param password
 	bool conn(const char*,const char*,const char*,const char*); 
 
 	//creo q esto es un problema 
@@ -45,7 +50,10 @@ public:
 	///\brief fills a vector with all the data in a determined field
 	bool fill_vector(const char*, vector<double> &);
 	
-	///\brief fills a vector with aleatory values 
+	///\brief fills a vector with aleatory values
+	///\param col_name the name of the field
+	///\param &m vector that is going to be filled
+	///\param delta set the range of the posible aleatory values
 	bool fill_vector(const char*, vector<double> &, int);
 	
 	///\brief obtain the number of lines(rows) of a determined table
@@ -62,9 +70,13 @@ public:
 	float mean(const char*);
 	
 	///\brief obtain variance value of a field
+	///\return the variance value of data taken from the selected field
+	///\param str a constant pointer to a character, the name of the field 
 	float variance(const char*);
 	
 	///\brief obtain standar deviation value of a field
+	///\return the standar deviation value of data taken from the selected field
+	///\param str a constant pointer to a character, the name of the field
 	float standard_deviation(const char*);
 	
 	///\brief perform a kolgomorov-smirnov test on a set of data for a uniform distribution hypothesis.
@@ -77,14 +89,20 @@ public:
 	bool histogram(const char*,int);
 	
 	///\brief displays the best-fit gaussian distributions of a set of data
-	///\param str the name of the field desired
+	///\param str the name of the desired field 
 	///\return the gaussian distribution plot
 	bool gaussian_distribution(const char*);
 	
 	/// displays a jitterplot of a field
+	///\param str the name of the desired field
+	///\param delta set the range of the posible separation of equal values
+	///\return the jitter plot
 	bool jitterplot(const char*, int);
 	
 	/// displays a scatterplot of a fields, supposed to be x-y
+	///\param str1	the field of the x-axis
+	///\param str2  the field of the y-axis
+	///\return the scatter plot	
 	bool scatterplot(const char*, const char*);
 	
 	///\brief displays the kernel density estimation of a set of data
