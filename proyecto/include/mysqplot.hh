@@ -45,9 +45,15 @@ public:
 	bool conn(const char*,const char*,const char*,const char*,const char*);
 	
 	///\brief fills a vector with a determined set of rows of a determined field
+	///\param inicio start position
+	///\param fin end position
+	///\param col_name the name of the field
+	///\param &m vector that is going to be filled
 	bool fill_vector(int,int, const char*, vector<double> &);
 	
 	///\brief fills a vector with all the data in a determined field
+	///\param col_name the name of the field
+	///\param &m vector that is going to be filled
 	bool fill_vector(const char*, vector<double> &);
 	
 	///\brief fills a vector with aleatory values
