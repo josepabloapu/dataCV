@@ -3,11 +3,11 @@
 
 #include <string>
 #include <iostream>
-#include <stdlib.h>  // no me acuerdo para que esta
+#include <stdlib.h>  	// no me acuerdo para que esta
 #include <mysql++.h>
-#include <algorithm>  // sort()
-#include <sstream>
-#include <cmath> // abs(float)
+#include <algorithm>  	// for sort()
+#include <sstream> 		// for ostringstream
+#include <cmath> 		// for abs(float) and pow()
 
 using namespace std;
 
@@ -15,54 +15,93 @@ class Mysqplot{
 
 private:
 
+	// member data
+	///\brief name of mysql table in which the data is
 	string table;
+	///\brief number of lines in the mysql table
 	int n_lines;
+	///\brief number of columms in the mysql table
 	int n_cols;
 
 public:
-
+	
+	// Constructor & Destructor
+	///\brief set the mysql table name during construction
 	Mysqplot(string);
 	~Mysqplot();
-  	///connects to mysql server
+  	
+  	// Member functions
+  	///\brief connects to mysql server
 	bool conn(const char*,const char*,const char*,const char*); 
 
-	///creo q esto es un problema 
-	///pero a como lo estoy haciendo hay q crear una conexion diferente 
-	///para el histograma
+	//creo q esto es un problema 
+	//pero a como lo estoy haciendo hay q crear una conexion diferente 
+	//para el histograma
 	bool conn(const char*,const char*,const char*,const char*,const char*);
 	
-	///
+	///\brief fills a vector with a determined set of rows of a determined field
 	bool fill_vector(int,int, const char*, vector<double> &);
-	///
+	
+	///\brief fills a vector with all the data in a determined field
 	bool fill_vector(const char*, vector<double> &);
-	///fills a vector of aleatory values from -delta to +delta, where delta is the int parameter
+	
+	///\brief fills a vector with aleatory values 
 	bool fill_vector(const char*, vector<double> &, int);
-	///obtain the number of lines(rows) of a determined table
+	
+	///\brief obtain the number of lines(rows) of a determined table
+	/// \return number of rows of the table that the object connected	
 	int get_lines();
-	///obtain the number of fields(columns) of a determined table
+	
+	///\brief obtain the number of fields(columns) of a determined table
+	///\return number of fields of the table that the object connected
 	int get_cols();
-  	/// obtain mean value of a field
+  	
+  	///\brief obtain mean value of a field.
+	///\param str a constant pointer to a character, the name of the field
+	///\return the mean of the selected field
 	float mean(const char*);
-	/// obtain variance value of a field
+	
+	///\brief obtain variance value of a field
 	float variance(const char*);
-	/// obtain standar deviation value of a field
+	
+	///\brief obtain standar deviation value of a field
 	float standard_deviation(const char*);
-
+	
+	///\brief perform a kolgomorov-smirnov test on a set of data for a uniform distribution hypothesis.
+	///\param str the name of the field desired
+	///\param a the "a" parameter of the uniform distribution
+	///\param b the "b" parameter of the uniform distribution
+	///\return the kolmogorov test result
 	double kolmogorov_test_uniform(const char*,float,float);
 
-	///
 	bool histogram(const char*,int);
-	/// displays a gaussian distributions of a field
+	
+	///\brief displays the best-fit gaussian distributions of a set of data
+	///\param str the name of the field desired
+	///\return the gaussian distribution plot
 	bool gaussian_distribution(const char*);
+	
 	/// displays a jitterplot of a field
 	bool jitterplot(const char*, int);
+	
 	/// displays a scatterplot of a fields, supposed to be x-y
 	bool scatterplot(const char*, const char*);
-	/// displays a kernel density estimates function of a fields
+	
+	///\brief displays the kernel density estimation of a set of data
+	///\param str the name of the field desired
+	///\param bandwidth set the bandwidth of the kernel
+	///\return the KDE plot
 	bool kde(const char*,float=1.0);
-	/// displays a kernel density estimates function of a fields
+	
+	///\brief displays the Probability Density Function of a set of data
+	///\param str the name of the field desired
+	///\param gauss set the display of the best-fit gaussian density function (by default false==no)
+	///\return the PDF plot 
 	bool pdf(const char*,bool=false);
-	/// displays a cumulative distribution function of a fields
+	
+	///\brief displays the Cummulative Distribution Function of a set of data
+	///\param str the name of the field desired
+	///\return the CDF plot 
 	bool cdf(const char*);
 	///
 

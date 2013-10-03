@@ -1,11 +1,8 @@
 #include "../include/mysqplot.hh"
 #include "../include/gnuplot_i.hpp"
-#include <math.h> // funcion pow()
-
-mysqlpp::StoreQueryResult result_object;
 
 ////////////////////////////////////////////////////////////////
-// Estas funciones deberian ir en un header aparte
+// Auxiliary functions
 
 void wait_for_key ()
 {
@@ -52,6 +49,8 @@ string normal_standard_density(float shift,float scale){
 }
 
 ///////////////////////////////////////////////////////////////////
+
+mysqlpp::StoreQueryResult result_object;
 
 Mysqplot::Mysqplot(string name){
   table = name;
@@ -496,6 +495,10 @@ double Mysqplot::kolmogorov_test_uniform(const char* str,float a,float b){
 		temp = abs(v2[i]-hy_pt[i][1]);
 		if (temp>Dn) Dn=temp;
 	}
+	
+	for(int i=0;i<(int)v1.size();++i)
+		delete [] hy_pt[i];
+	delete [] hy_pt;
 	
 	return Dn; 
 	
