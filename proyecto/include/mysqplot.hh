@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include <stdlib.h>  		// no me acuerdo para que esta
+#include <stdlib.h>
 #include <mysql++.h>
 #include <algorithm>  		// for sort()
 #include <sstream> 		// for ostringstream
@@ -27,6 +27,7 @@ public:
 	
 	// Constructor & Destructor
 	///\brief set the mysql table name during construction
+	///\param name it's the name of the table to connect in the mysql database
 	Mysqplot(string);
 	///\brief mysql table destructor
 	~Mysqplot();
@@ -127,8 +128,10 @@ public:
 	///\param str the name of the field desired
 	///\return the CDF plot 
 	bool cdf(const char*);
-	///
-
+	
+	///\brief obtains the best-fit gaussian density function for a discrete set of data
+	///\param str  the name of the field desired
+	///\return a string with the normal density function
 	string gaussian_distribution_function(const char*);
 };
 
