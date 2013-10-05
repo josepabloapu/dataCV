@@ -22,6 +22,13 @@
 *.aux
 *.pdf
 
+#Beamer aux files
+*.nav
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+
 #Executable files
 *.exe
 
