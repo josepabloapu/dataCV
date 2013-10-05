@@ -208,7 +208,7 @@ bool Mysqplot::histogram(const char* str1, int cols){
 	Gnuplot g1("Histogram");
 	g1.set_legend("outside right top");
 	g1.set_xrange(xmin-(0.5*xmin),xmax+(0.5*xmax)).set_yrange(ymin-(0.5*ymin),ymax+(0.5*ymax));
-	g1.set_style("points").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
+	g1.set_style("steps").plot_xy(x,y,(string)str2+" vs. "+(string)str1);
 	
 	wait_for_key();
 	return true;
