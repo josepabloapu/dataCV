@@ -10,20 +10,20 @@
 \usepackage{graphicx,hyperref,url}
 \usepackage{mdframed}
 \usepackage{tikz}
-\usetikzlibrary{snakes}
 \usepackage{chronology}
 \usepackage{listings}
 \graphicspath{{../multimedia/images/}}
 \definecolor{shadecolor}{RGB}{250,250,250}
+\usetikzlibrary{arrows,positioning}
 \addtobeamertemplate{background canvas}{\transduration{2}}{}
 \lstset{
-		basicstyle=\ttfamily,
-		keywordstyle=\color{black},
-		commentstyle=\color{black},
-		stringstyle=\color{black},
-		tabsize=2,
-		backgroundcolor=\color{shadecolor}
-		}
+	basicstyle=\ttfamily,
+	keywordstyle=\color{black},
+	commentstyle=\color{black},
+	stringstyle=\color{black},
+	tabsize=2,
+	backgroundcolor=\color{shadecolor}
+	}
 
 \title[dataCV]{
 		dataCV: Library for data computing visualization.
@@ -64,10 +64,25 @@
 \section{Introduction}
 \begin{frame}
 \frametitle{mysql++}
+%% importancia del manejo de datos, utilizando bases de datos
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {data};
+  \node[main node] (2) [right of=1] {database};
+  \node[main node] (3) [right of=2] {cpp};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend right] node[below] {mysql++} (2)
+    (2) edge [bend right] node[below] {mysql++} (3);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{gnuplot-cpp}
+
 \end{frame}
 
 \begin{frame}
