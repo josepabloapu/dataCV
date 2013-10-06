@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////
 // Auxiliary functions
 
+///\brief holds the figure displayer until you press a key
 void wait_for_key ()
 {
     cout << endl << "Press ENTER to continue..." << endl;
@@ -14,6 +15,9 @@ void wait_for_key ()
     return;
 }
 
+///\brief transforme an integer to string
+///\param Number  
+///\return string
 std::string NumberToString (int Number)
 {
     std::ostringstream ss;
@@ -21,6 +25,9 @@ std::string NumberToString (int Number)
     return ss.str();
 }
 
+///\brief transforme float to string
+///\param Number  
+///\return string
 std::string NumberToString (float Number)
 {
     stringstream ss (stringstream::in | stringstream::out);
@@ -32,6 +39,10 @@ std::string step (float a){
 	return "x>"+NumberToString(a)+" ? 1 : 0";
 }
 
+///\brief set the scale to be used on the plot
+///\param &v1 the vector
+///\param minimun min value of the vector
+///\param maximun max value of the vector
 void minMax(vector<double> &v1,float &min,float &max){
 	for(int i=0;i<(int)v1.size();++i){
 		if (v1[i]>max) max=v1[i];

@@ -70,11 +70,9 @@
 \begin{center}
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
   thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
-
   \node[main node] (1) {data};
   \node[main node] (2) [right of=1] {database};
   \node[main node] (3) [right of=2] {cpp};
-
   \path[every node/.style={font=\sffamily\small}]
     (1) edge [bend right] node[below] {mysql++} (2)
     (2) edge [bend right] node[below] {mysql++} (3);
@@ -82,13 +80,36 @@
 \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{gnuplot-cpp}
-
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\includegraphics[scale=0.15]{gnuplot_demo_1}\\
+\includegraphics[scale=0.2]{gnuplot_demo_2}
+\end{column}
+\begin{column}{0.7\textwidth}
+\includegraphics[scale=0.5]{gnuplot_demo_3}
+\begin{lstlisting}
+plot_equation("sin(x)","sine");
+plot_xy(x,y,"points 2d");
+\end{lstlisting}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{mysqplot}
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+  \node[main node] (1) {database};
+  \node[main node] (2) [right of=1] {cpp};
+  \node[main node] (3) [right of=2] {plotting};
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend right] node[below] {mysqlplot} (2)
+    (2) edge [bend right] node[below] {mysqlplot} (3);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Body1}
@@ -120,8 +141,8 @@
 
 \begin{column}{0.7\textwidth}
 \begin{center}
-gitterplot(meses,0);\\
-gitterplot(meses,2);
+gitterplot("meses",0);\\
+gitterplot("meses",2);
 \end{center}
 \includegraphics[scale=0.5]{jitterplot}
 
