@@ -1,0 +1,205 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}						%%make hyperlinks
+\usepackage{listings}				%%
+
+
+\title{dataCV: Una librería para visualización de datos}
+\author{Jose Pablo Apú Picado \\
+		Jose Carlos Campos Valerio \\
+        Jorge Soto Avendaño}
+
+\begin{document}
+\maketitle
+
+\section{Introducción}
+
+Con el fin de brindar una mayor facilidad para visualizar los datos, 
+la idea es crear una libreria, en c++, que tome los datos a traves de una 
+base de datos y los despliegue en pantalla de una manera grafica. Para lograr 
+dicha tarea se utilizara mysql como manejador de bases de datos, utilizando 
+la libreria mysql++ y para visualizar los datos de manera grafica se piensa 
+utilizar la libreria llamada plot++. Además se pretende implementar un set 
+de herramientas para obtener datos estadísticos de los datos obtenidos de la base de datos. 
+
+\section{Justificación}
+
+La librería será diseñada para que cualquier usuario de MySql pueda utilizarla.
+La visualización de datos permite un mejor análisis y una mayor comprensión 
+de los mismos. En una base de datos, la información es prácticamente números 
+y letras únicamente. Al graficar dicha información, se puede entender de una mejor
+manera el significado de los datos.
+
+Cuando se tiene una gran cantidad de información, millones de datos individuales, 
+es dificil poder interpretar la información y analizarla para así poder tomar
+una decisión con base en los resultados obtenidos. Para poder darle un sentido
+de forma eficiente a esta gran cantidad de información se tiene por respuesta 
+la visualización de datos. Pero también se debe seleccionar la visualización
+apropiada para un conjunto de datos determinado, ya que no todos los métodos 
+de graficación son apropiados para describir los resultados obtenidos.\cite{oreilly} 
+
+En el nivel emprasarial, se debe hacer uso de herramientas de visualización de datos.
+La cantidad de datos es proporcional al tamaño de la empresa. Teniendo muchos datos, 
+es más dificil encontrar patrones y relaciones para la correcta toma de decisiones. 
+Se necesita elegir de manera rápida y precisa las decisiones de negocios para que 
+la empresa permanezca competitiva.\cite{dundas}
+
+\section{Objetivos}
+
+\subsection{Objetivo General}
+Diseñar una biblioteca que permita la visualización de la información en una base de datos.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+\item Implementar un módulo que utilice mysql++ para que importe una serie de datos desde MySql 
+      y los convierta en información compatible para la librería que grafica.
+\item Implementar un conjunto de herramientas matemáticas que permitan un análisis
+	  estadístico cuantitativo de los datos.
+\item Implementar un modulo que permita el análisis cualitativo de la información mediante 
+	  distintas técnicas de visualización de datos.
+\end{itemize}
+
+\section{Nota Histórica}
+
+Los primeros indicios de estadística datan aproximadamente del año 3050 a.C., cuando los egipcios recopilaron información acerca de las poblaciones y riquezas. Luego, los antiguos israelitas, chinos y griegos aplicaron estadística a las poblaciones, producción y comercio.
+Los conocimientos estadísticos permanecieron estancados por algunos siglos y se retomaron en la época del renacimiento.
+
+Tiempo después, en el siglo XVII se empezó a plantear las primeras teorías formales de probabilidad y estadística, y en el siglo siguiente se aplicaron dichos conocimientos al resto de las ciencias existentes.
+
+Recientemente, los avances estadísticos más importantes se han dado con el cálculo de probabilidades, específicamente el indeterminismo y la relatividad, los cuales se pueden aplicar a ciencias tanto naturales como sociales.  
+
+\section{Desarrollo Teórico} %explicación de la teoria y del trabajo
+
+Se decidió utilizar una sola clase (llamada \textit{Mysqplot}) para facilitar el uso de la librería para el usuario final, ya que de esta forma solo necesita crear un objeto de la clase el cual se conecta a una base de datos de Mysql y mediante alguno de los métodos desarrollados y algunos parámetros requeridos por cada uno de los métodos, se obtiene la gráfica requerida.
+
+Para realizar la graficación se optó por utilizar gnuplot ya que es un potente graficador que trabaja mediante lineas de comandos, lo cual facilita la programación de distintos gráficos a partir del lenguaje de programación C++.
+
+A continuación se presenta una descripción de cada uno de los métodos implementados en la librería.
+
+
+\subsection{Varianza}
+Es una medida de dispersión definida como la esperanza del cuadrado de la desviación de dicha variable respecto a su media.
+
+Está medida en unidades distintas de las de la variable. Por ejemplo, si la variable mide una distancia en metros, la varianza se expresa en metros al cuadrado. La desviación estándar es la raíz cuadrada de la varianza, es una medida de dispersión alternativa expresada en las mismas unidades de los datos de la variable objeto de estudio. La varianza tiene como valor mínimo 0.
+
+Hay que tener en cuenta que la varianza puede verse muy influida por los valores atípicos y no se aconseja su uso cuando las distribuciones de las variables aleatorias tienen colas pesadas. En tales casos se recomienda el uso de otras medidas de dispersión más robustas.
+
+\subsection{Mediana}
+En el ámbito de la estadística, la mediana, representa el valor de la variable de posición central en un conjunto de datos ordenados. De acuerdo con esta definición el conjunto de datos menores o iguales que la mediana representarán el 50\% de los datos, y los que sean mayores que la mediana representarán el otro 50\% del total de datos de la muestra.
+
+\subsection{Desviación Estándar}
+Es una medida de dispersión para variables de razón (variables cuantitativas o cantidades racionales) y de intervalo. Se define como la raíz cuadrada de la varianza. Junto con este valor, la desviación típica es una medida (cuadrática) que informa de la media de distancias que tienen los datos respecto de su media aritmética, expresada en las mismas unidades que la variable.
+
+\subsection{Histograma}
+Es una representación gráfica de una variable en forma de barras, donde la superficie de cada barra es proporcional a la frecuencia de los valores representados. Sirven para obtener una "primera vista" general, o panorama, de la distribución de la población, o la muestra, respecto a una característica, cuantitativa y continua, de la misma y que es de interés para el observador (como la longitud o la masa). De esta manera ofrece una visión en grupo permitiendo observar una preferencia, o tendencia, por parte de la muestra o población por ubicarse hacia una determinada región de valores dentro del espectro de valores posibles (sean infinitos o no) que pueda adquirir la característica.
+
+
+\subsection{Distribución gaussiana}
+Es una distribuciones de probabilidad de variable continua que con más frecuencia aparece aproximada en fenómenos reales.
+
+La gráfica de su función de densidad tiene una forma acampanada y es simétrica respecto de un determinado parámetro estadístico. Esta curva se conoce como campana de Gauss y es el gráfico de una función gaussiana.
+
+$$\frac{1}{\sqrt{2\pi \sigma^2}}e^\frac{-(x-\mu)^2}{2 \sigma^2}$$
+
+\subsection{Scatterplot}
+El scatterplot o bien diagrama de dispersión es un tipo de diagrama matemático que utiliza las coordenadas cartesianas para mostrar los valores de dos variables para un conjunto de datos.
+
+Los datos se muestran como un conjunto de puntos, cada uno con el valor de una variable que determina la posición en el eje horizontal y el valor de la otra variable determinado por la posición en el eje vertical.
+
+\subsection{Jitterplot}
+El jitterplot viene de jitter que significa fluctuación. Con siste en en modificar la posición en y o en x, pero en solo un eje en un cierto rango. Esto se usa para datos que se repiten, para que estos no se traslapen y poder observar que tanto se repite.
+
+\subsection{Kernel Density Estimates (KDE)}
+
+El método KDE grafica el \textit{Kernel Density Estimates} de un conjunto de datos. El KDE es un nuevo tipo de visualización de datos que solo puede ser generado computacionalmente, a diferencia del histograma, el KDE genera una curva suave en donde se presenta la afinidad de un conjunto de datos.
+
+Se utilizó como núcleo una funcion de densidad gaussiana estándar para cada uno de los datos, esto por defecto para el método, pero también, mediante un parámetro adicional el tamaño de la ventana de los núcleos puede ser modificado por el usuario para lograr el resultado deseado. La siguiente equación muestra la función del KDE:
+
+$$\sum_{i=i}^n{\frac{1}{h}K \left( \frac{x-x_i}{h} \right)}$$
+
+en donde $K$ es igual a:
+
+$$ \frac{1}{\sqrt{2 \pi}} \exp{ \left( - \frac{1}{2}x^2 \right)} $$
+
+\subsection{Cumulative Distribution Function (CDF)}
+
+La función de distribución cumulativa o CDF por sus siglas en inglés es una función de una variable aleatoria $X$ dada por:
+
+$$ F_X(x) = P\{X \le x\} $$
+
+Lo cual es la probabilidad del evento en que la variable aleatoria $X$ sea menor o igual que $x$, en donde  $x$ es cualquier número real entre $-\infty$ a $\infty$. 
+
+El método CDF de la librería obtiene obtiene la distribución discreta de un conjunto de datos obtenidos de una tabla de Mysql y grafica la función mediante gnuplot. Al ser un conjunto de datos discretos este método se implemento utilizando la siguiente definición:
+
+$$ F_X(x) = \sum_{i=1}^N P(x_i)u(x-x_i) $$
+
+En donde $P(x_i)$ es la probabilidad de que ocurra el evento $x_i$ y $u(x)$ es la función escalón unitario.
+
+\subsection{Probability Density Function (PDF)}
+
+La función de densidad probabilística (PDF) de una variable aleatoria se define como:
+
+$$ f_X(x) = \frac{dF_X(x)}{dx} $$
+
+El método PDF de la clase Mysqplot de la librería devuelve la gráfica de la función de densidad de un conjunto de datos. La implementación de la densidad en el programa se realizó utilizando la definición para una variable aleatoria discteta:
+
+$$ f_X(x) = \sum_{i=1}^N P(x_i)\delta(x-x_i) $$
+
+En donde $\delta(x)$ es la función impulso. 
+
+\subsection{Prueba de Kolmogorov-Smirnov}
+
+La prueba de Kolmogorov-Smirnov es una prueba no paramétrica para probar si una distribución probabilística se ajusta a una función de distribución hipótesis. La prueba de Kolmogorov determina la distancia máxima entre la distribución obtenida experimentalmente y la distribución hipótesis. Luego a partir de este resultado se determina si la hipótesis se rechaza o no. La distancia de Kolmogorov esta dada por la siguiente ecuación:
+
+$$ D_n = \sup_x{|F_n(x)-F(x)|} $$
+
+En donde $F_n(x)$ es la distribución obtenida experimentalmente y $F(x)$ es la distribución hipótesis. El método \texttt{kolmogorov\_test\_uniform} determina la distancia de kolmogorov para una distribución probabilística dada por un conjunto de datos respeto a una distribución hipótesis uniforme.
+
+\section{Instrucciones de instalación y uso}
+
+Estas instrucciones son basadas en la distribución de debian, sirve tanto para la estable como para la versión testing, pero sirve para otras distribuciones. Mysqplot es un wrapper de mysql++ y gnuplot-cpp, por lo que hay que estar seguros de haber instalado ambas previamente. 
+
+\subsection*{Dependencias}
+\begin{itemize}
+\item mysql++
+\begin{itemize}
+\item download the source files from \url{http://tangentsoft.net/mysql++/}
+\item make sure you have installed libmysql++-dev
+\item to know the path of the mysql-lib you can make a locate after doing an updatedb
+\end{itemize}
+\begin{lstlisting}
+./configure --with-mysql-lib=/PATH/OF/THE/MYSQL-LIB
+make
+sudo make install
+\end{lstlisting}
+\item gnuplot-cpp\\
+download gnuplot-cpp.hh from:\\ \url{http://code.google.com/p/gnuplot-cpp/downloads/list}
+\begin{lstlisting}
+sudo apt-get install gnuplot
+sudo apt-get install gnuplot-x11
+\end{lstlisting}
+\end{itemize}
+
+
+%% --- References ------------------------
+
+\begin{thebibliography}{10}
+\bibitem{tangent}\url{http://tangentsoft.net/mysql++/}
+\bibitem{opengl}\url{http://www.opengl.org/}
+\bibitem{sfml}\url{http://www.sfml-dev.org/}
+\bibitem{oreilly}Steele, J., \textit{Why data visualization matters}, 
+		\url{http://strata.oreilly.com/2012/02/why-data-visualization-matters.html}
+\bibitem{dundas}Dundas Data Visualization, Inc., \textit{Making Business Decisions Easier with Data Visualizations}
+		\url{http://www.dundas.com/discover/article/making-business-decisions-easier-with-data-visualizations/}
+\end{thebibliography}
+
+%% ----------------------------------------
+
+\end{document}

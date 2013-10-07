@@ -17,7 +17,7 @@
 \graphicspath{{../multimedia/imagenes}}
 \definecolor{shadecolor}{RGB}{250,250,250}
 \usetikzlibrary{arrows,positioning}
-\addtobeamertemplate{background canvas}{\transduration{2}}{}
+\addtobeamertemplate{background canvas}{\transduration{20}}{}
 \lstset{
 	basicstyle=\ttfamily,
 	keywordstyle=\color{black},
@@ -51,13 +51,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%	DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{document}
 
 \begin{frame}
   \titlepage
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
   \frametitle{Outline}
   \tableofcontents
@@ -78,10 +77,6 @@
 \item Advances in the XVII and XVIII.
 \item XXI Century: calculation of probabilities, indeterminism and relativity.
 \end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{importance}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Libraries}
@@ -141,9 +136,7 @@ plot_xy(x,y,"points 2d");
 \item
 Media
 \item
-\begin{equation}
-\mu = \sum_{i=1}^{n} p_i (x_i)
-\end{equation}
+$$\mu = \sum_{i=1}^{n} p_i (x_i)$$
 $x_i$: event or variable
 
 $p_i$: probability of event $x_i$
@@ -157,15 +150,10 @@ $p_i$: probability of event $x_i$
 \item
 Variance
 \item 
-\begin{equation} 
-{\sigma}^{2}=\sum_{i=1}^{n} p_i {(x_i - u)}^{2}
-\end{equation}
+$$ {\sigma}^{2}=\sum_{i=1}^{n} p_i {(x_i - u)}^{2}$$
 $x_i$: event or variable
-
 $p_i$: probability of event $x_i$
-
 $u$: mean
-
 \item 
 Standard Deviation = $\sigma$
 
@@ -243,8 +231,6 @@ gitterplot("meses",2);
 \end{center}
 \end{frame}
 
-<<<<<<< HEAD
-=======
 \begin{frame}
 \frametitle{PDF - Probability Density Function}
 \begin{center}
@@ -272,8 +258,6 @@ $U(0,1) -> D_{25} = 0.807692$
 $U(0,4) -> D_{25} = 0.269231$
 $U(0,6) -> D_{25} = 0.0897436$
 \end{center}
-
-
 \includegraphics[scale=0.38]{kst2}
 \end{column}
 \begin{column}{0.5\textwidth}
@@ -281,10 +265,6 @@ $U(0,6) -> D_{25} = 0.0897436$
 \end{column}
 \end{columns}
 \end{frame}
-
-
-
-%>>>>>>> 46e3ec13fb9ebc45bb5577d8ba49f3b6d49e7649
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 \begin{frame}
@@ -292,6 +272,12 @@ $U(0,6) -> D_{25} = 0.0897436$
 \begin{itemize}
 \item A library to visualize the information from a database was succesfully designed.
 \item A module to import data from MySql using mysql++ was created.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+\begin{itemize}
 \item A group of mathematical tools were implemented to make a statistical analysis of data.
 \item A module that enables qualitative analysis through visualization was developed. 
 \end{itemize}
@@ -300,5 +286,5 @@ $U(0,6) -> D_{25} = 0.0897436$
 \begin{frame}
 \frametitle{Questions?}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \end{document}
