@@ -3,6 +3,14 @@
 using namespace std;
 
 int main(){
+
+	Mysqplot Gaussdis ("gaussdis");
+	Gaussdis.conn("test", "localhost", "root", "root");
+	Gaussdis.gaussian_distribution("data");
+	
+	Mysqplot Jittertest ("jitter");
+	Jittertest.conn("test", "localhost", "root", "root");
+	Jittertest.jitterplot("data", 3);
 	
 	Mysqplot KDEtest ("kdetest");
 	KDEtest.conn("test","localhost","root","root");
