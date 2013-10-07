@@ -35,6 +35,9 @@ std::string NumberToString (float Number)
     return ss.str();
 }
 
+///\brief gets a delayed step function to use as input for gnuplot 
+///\param a the delay parameter of the step function
+///\return a string with the step function
 std::string step (float a){
 	return "x>"+NumberToString(a)+" ? 1 : 0";
 }
@@ -51,6 +54,10 @@ void minMax(vector<double> &v1,float &min,float &max){
 	return;
 }
 
+///\brief gets the normal density function to use as input for gnuplot
+///\param shift the shift factor of the density function
+///\param scale the scale factro of the density function
+///\return a string with the normal density function
 string normal_standard_density(float shift,float scale){
 	string sh = NumberToString (shift);
 	string sc = NumberToString (scale);
