@@ -135,7 +135,7 @@ plot_xy(x,y,"points 2d");
 \frametitle{gaussian distribution}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{jitterplot}
 
 \begin{columns}
@@ -146,8 +146,10 @@ plot_xy(x,y,"points 2d");
 
 \begin{column}{0.7\textwidth}
 \begin{center}
-gitterplot("meses",0);\\
+\begin{lstlisting}
+gitterplot("meses",0);
 gitterplot("meses",2);
+\end{lstlisting}
 \end{center}
 \includegraphics[scale=0.5]{jitterplot}
 
