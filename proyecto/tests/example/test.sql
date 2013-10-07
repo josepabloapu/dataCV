@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 07, 2013 at 01:42 AM
+-- Generation Time: Oct 07, 2013 at 02:08 AM
 -- Server version: 5.5.31-1
 -- PHP Version: 5.5.3-1
 
@@ -30,7 +30,24 @@ CREATE TABLE IF NOT EXISTS `gauss` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datos` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `gauss`
+--
+
+INSERT INTO `gauss` (`id`, `datos`) VALUES
+(1, 1),
+(2, 2),
+(3, 2),
+(4, 3),
+(5, 3),
+(6, 3),
+(7, 3),
+(8, 4),
+(9, 4),
+(10, 4),
+(11, 5);
 
 -- --------------------------------------------------------
 
@@ -101,7 +118,56 @@ CREATE TABLE IF NOT EXISTS `kdetest` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datos` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+
+--
+-- Dumping data for table `kdetest`
+--
+
+INSERT INTO `kdetest` (`id`, `datos`) VALUES
+(1, 94),
+(2, 48),
+(3, 96),
+(4, 96),
+(5, 96),
+(6, 48),
+(7, 96),
+(8, 48),
+(9, 1),
+(10, 47),
+(11, 48),
+(12, 16),
+(13, 32),
+(14, 48),
+(15, 48),
+(16, 49),
+(17, 47),
+(18, 96),
+(19, 48),
+(20, 7),
+(21, 41),
+(22, 48),
+(23, 48),
+(24, 48),
+(25, 54),
+(26, 90),
+(27, 48),
+(28, 96),
+(29, 29),
+(30, 67),
+(31, 48),
+(32, 146),
+(33, 92),
+(34, 96),
+(35, 34),
+(36, 62),
+(37, 67),
+(38, 29),
+(39, 48),
+(40, 96),
+(41, 48),
+(42, 96),
+(43, 96);
 
 -- --------------------------------------------------------
 
@@ -113,7 +179,38 @@ CREATE TABLE IF NOT EXISTS `kstest` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datos` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `kstest`
+--
+
+INSERT INTO `kstest` (`id`, `datos`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 2),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 2),
+(10, 2),
+(11, 3),
+(12, 3),
+(13, 3),
+(14, 4),
+(15, 4),
+(16, 4),
+(17, 4),
+(18, 4),
+(19, 5),
+(20, 5),
+(21, 5),
+(22, 5),
+(23, 6),
+(24, 6),
+(25, 6);
 
 -- --------------------------------------------------------
 
@@ -123,9 +220,119 @@ CREATE TABLE IF NOT EXISTS `kstest` (
 
 CREATE TABLE IF NOT EXISTS `pdftest1` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `daatos` float NOT NULL,
+  `datos` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
+
+--
+-- Dumping data for table `pdftest1`
+--
+
+INSERT INTO `pdftest1` (`id`, `datos`) VALUES
+(1, 7),
+(2, 7),
+(3, 7),
+(4, 7),
+(5, 7),
+(6, 7),
+(7, 7),
+(8, 7),
+(9, 7),
+(10, 7),
+(11, 7),
+(12, 7),
+(13, 7),
+(14, 7),
+(15, 7),
+(16, 7),
+(17, 7),
+(18, 7),
+(19, 7),
+(20, 7),
+(21, 6.4),
+(22, 6.4),
+(23, 6.4),
+(24, 6.4),
+(25, 6.4),
+(26, 6.4),
+(27, 6.4),
+(28, 6.4),
+(29, 6.4),
+(30, 6.4),
+(31, 6.4),
+(32, 6.4),
+(33, 6.4),
+(34, 6.4),
+(35, 6.4),
+(36, 6.4),
+(37, 6.4),
+(38, 6.4),
+(39, 6.1),
+(40, 6.1),
+(41, 6.1),
+(42, 6.1),
+(43, 6.1),
+(44, 6.1),
+(45, 6.1),
+(46, 6.1),
+(47, 6.1),
+(48, 6.1),
+(49, 6.1),
+(50, 6.1),
+(51, 6.1),
+(52, 7.1),
+(53, 7.1),
+(54, 7.1),
+(55, 7.1),
+(56, 7.1),
+(57, 7.1),
+(58, 7.1),
+(59, 7.1),
+(60, 7.1),
+(61, 7.1),
+(62, 7.1),
+(63, 7.1),
+(64, 7.1),
+(65, 7.1),
+(66, 7.1),
+(67, 5.6),
+(68, 5.6),
+(69, 5.6),
+(70, 5.6),
+(71, 5.6),
+(72, 5.6),
+(73, 5.6),
+(74, 7.3),
+(75, 7.3),
+(76, 7.3),
+(77, 7.3),
+(78, 7.3),
+(79, 7.3),
+(80, 7.3),
+(81, 7.3),
+(82, 7.3),
+(83, 4.3),
+(84, 4.3),
+(85, 4.3),
+(86, 4.3),
+(87, 3),
+(88, 3),
+(89, 2.5),
+(90, 7.9),
+(91, 7.9),
+(92, 7.9),
+(93, 7.9),
+(94, 7.9),
+(95, 7.9),
+(96, 7.9),
+(97, 7.9),
+(98, 8.5),
+(99, 8.5),
+(100, 8.5),
+(101, 8.5),
+(102, 8.7),
+(103, 8.7),
+(104, 10);
 
 -- --------------------------------------------------------
 
@@ -137,7 +344,29 @@ CREATE TABLE IF NOT EXISTS `pdftest3` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datos` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `pdftest3`
+--
+
+INSERT INTO `pdftest3` (`id`, `datos`) VALUES
+(1, 2),
+(2, 5),
+(3, 5),
+(4, 10),
+(5, 10),
+(6, 10),
+(7, 15),
+(8, 15),
+(9, 15),
+(10, 15),
+(11, 23),
+(12, 23),
+(13, 23),
+(14, 28),
+(15, 28),
+(16, 33);
 
 -- --------------------------------------------------------
 
