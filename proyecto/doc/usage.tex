@@ -1,0 +1,97 @@
+%% LaTeX Document
+%% Author: Jose Pablo Apú, Jose Carlos Campos, Jorge Soto
+%% Document Class
+\documentclass[11pt]{article}
+%%*************************************************************************
+%% Most used packages
+\usepackage{graphicx}				%%include figures
+\usepackage[utf8]{inputenc}			%%include latin characters
+\usepackage[english]{babel}			%%spanish
+\usepackage[vmargin=4cm,			%%margins
+	    tmargin=3cm,
+	    hmargin=2cm,
+	    letterpaper]{geometry}
+\usepackage{color}				%%include colors
+\usepackage{fancyhdr}				%%use fancy headers and footes
+\usepackage{framed}				%%framed boxes
+\usepackage{hyperref}				%%make hyperlinks
+\usepackage{listings}				%%
+%%*************************************************************************
+%% Other settings
+\definecolor{shadecolor}{rgb}{1,0.8,0.3}	%%boxes color
+\setlength{\parindent}{0pt}			%%indemptation
+\pagestyle{fancy}				%%needed to include fancy styles
+\renewcommand{\headrulewidth}{0.25mm}		%%linewidth of the headers
+\pagenumbering{gobble}				%%remove the page number
+\graphicspath{{../../multimedia/imagenes/}}	%%multimedia path
+\definecolor{shadecolor}{RGB}{250,250,250}	%%boxes color
+\lstset{
+	basicstyle=\ttfamily,
+	keywordstyle=\color{black},
+	commentstyle=\color{black},
+	stringstyle=\color{black},
+	tabsize=2,
+	backgroundcolor=\color{shadecolor}}
+%%*************************************************************************
+%% Fancy Header
+%% EIE's template
+\fancyhead[L]{\includegraphics[scale=0.15]{ucr}}
+\fancyhead[C]{UNIVERSIDAD DE COSTA RICA\\
+	      ESCUELA DE INGENIERÍA ELECTRICA\\
+	      ESTRUCTURAS ABSTRACTAS DE DATOS Y ALGORITMOS\\
+	      PARA INGENIERIA - IE0217\\
+	      PROYECTO I - GUÍA DE USO}
+\fancyhead[R]{\includegraphics[scale=0.4]{eie}}
+\pagestyle{fancy}
+\setlength{\headheight}{60pt}
+%%*************************************************************************
+\begin{document}
+
+\begin{center}
+{ \huge \bfseries Data Computing Visualization Library }\\[0.2cm]
+{ Jose Carlos Campos - Jose Pablo Apu - Jorge Soto }\\[0.2cm]
+\rule{\linewidth}{0.25mm}
+\end{center}
+
+Primero se crea el costructor de la clase\\
+\begin{lstlisting}
+	Mysqplot(string);
+\end{lstlisting}	
+En necesario que el parámetro del contructor sea el nombre de la tabla. Luego se crea la conexión con la base de datos\\
+\begin{lstlisting}
+	bool conn(const char*,const char*,const char*,const char*); 
+\end{lstlisting}
+Donde se introduce la base de datos, el servidor, el usuario y la clave respectivamente. Luego se utiliza alguna de estas funciones:
+
+\begin{lstlisting}
+
+	float mean(const char*);
+	
+	float variance(const char*);
+	
+	float standard_deviation(const char*);
+	
+	double kolmogorov_test_uniform(const char*,float,float);
+
+	bool histogram(const char*,int);
+	
+	bool gaussian_distribution(const char*);
+	
+	bool jitterplot(const char*, int);
+		
+	bool scatterplot(const char*, const char*);
+	
+	bool kde(const char*,float=1.0);
+	 
+	bool pdf(const char*,bool=false);
+	 
+	bool cdf(const char*);
+
+\end{lstlisting}
+  	
+Finalmente para liberar espacio de la ram, se incluye el destructor.
+\begin{lstlisting}
+	~Mysqplot();
+\end{lstlisting}
+%%*************************************************************************	
+\end{document}
