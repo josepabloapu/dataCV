@@ -23,3 +23,7 @@ Also there are some statistics tools like:
 
 	- Gaussian distribution for a set of data
 	- Kolmogorov-Smirnov test
+
+To build the library and all the documentation just run:
+
+	$ make
